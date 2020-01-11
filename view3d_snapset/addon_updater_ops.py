@@ -1271,12 +1271,12 @@ def register(bl_info):
 	updater.user = "mkbreuer"
 
 	# choose your own repository, must match git name
-	updater.repo = "ToolPlus"
+	updater.repo = "SnapSet"
 
 	#updater.addon = # define at top of module, MUST be done first
 
 	# Website for manual addon download, optional but recommended to set
-	updater.website = "https://github.com/mkbreuer/ToolPlus/tree/master/2.81/Sets"
+	updater.website = "https://github.com/mkbreuer/SnapSet"
 
 	# Addon subfolder path
 	# "sample/path/to/addon"
