@@ -23,13 +23,13 @@
 bl_info = {
     "name": "SnapSet",
     "author": "marvin.k.breuer (MKB)",
-    "version": (0, 2, 9),
+    "version": (0, 3, 0),
     "blender": (2, 81, 0),
     "location": "3D View > Sidebar [N], Menu [SHIFT+W], Special Menu [W], Shortcut [F], in Header and Snap Settings",
     "description": "full customizable buttons for snapping task",
     "warning": "",
-    "wiki_url": "https://github.com/mkbreuer/ToolPlus",
-    "category": "3D View",
+    "wiki_url": "https://github.com/mkbreuer/view3d_snapset",
+    "category": "User Tools",
 }
 
 
@@ -325,7 +325,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
 
     ui_scale_x_b1 : FloatProperty(name="Scale X", description="scale box in pie menu", default=1.10, min=0.00, max=2.00, precision=2)
     ui_scale_x_b2 : FloatProperty(name="Scale X", description="scale box in pie menu", default=1.02, min=0.00, max=2.00, precision=2)
-    ui_scale_x_b3 : FloatProperty(name="Scale X", description="scale box in pie menu", default=1.10, min=0.00, max=2.00, precision=2)
+    ui_scale_x_b3 : FloatProperty(name="Scale X", description="scale box in pie menu", default=1.05, min=0.00, max=2.00, precision=2)
     ui_scale_x_b4 : FloatProperty(name="Scale X", description="scale box in pie menu", default=0.65, min=0.00, max=2.00, precision=2)
     ui_scale_x_b5 : FloatProperty(name="Scale X", description="scale box in pie menu", default=0.65, min=0.00, max=2.00, precision=2)
     ui_scale_x_b6 : FloatProperty(name="Scale X", description="scale box in pie menu", default=0.65, min=0.00, max=2.00, precision=2)
@@ -2796,7 +2796,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
             row = box.row(align=True)             
             row.prop(snap_global, 'toggle_keychange', text="", icon ="INFO")
             row.label(text="< Changing Shortcut Key !")
-            row.operator('wm.url_open', text="", icon='SCRIPT').url = "https://github.com/mkbreuer/Misc-Share-Archiv/blob/master/images/SHORTCUTS_Type%20of%20key%20event.png?raw=true"
+            row.operator('wm.url_open', text="", icon='SCRIPT').url = "https://docs.blender.org/api/2.80/bpy.types.Event.html"
                            
             box.separator()
            
@@ -2831,7 +2831,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                 row = box.row(align=True)  
                 row.label(text="", icon ="BLANK1")
                 row.operator("tpc_ot.keymap_snapset", text = 'Open KeyMap in Text Editor')
-                row.operator('wm.url_open', text = 'Type of Events').url = "https://docs.blender.org/api/blender_python_api_2_77_0/bpy.types.Event.html"
+                row.operator('wm.url_open', text = 'Type of Events').url = "https://docs.blender.org/api/2.80/bpy.types.Event.html"
  
                 box.separator()
 
@@ -2888,7 +2888,9 @@ classes = (
     VIEW3D_OT_align_tools,
     VIEW3D_OT_align_mesh,
     VIEW3D_OT_looptools,
+    VIEW3D_OT_3d_cursor_copy,
     VIEW3D_OT_3d_cursor_align,
+    VIEW3D_OT_face_cursor_modal,
     VIEW3D_OT_keymap_snapset,
     Addon_Preferences_Snapset,
     Global_Property_Group,

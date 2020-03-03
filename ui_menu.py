@@ -133,6 +133,10 @@ def draw_snapset_menu_ui(context, layout):
                 else:          
                     row.operator("tpc_ot.snapset_button_h", text=tx_snapset_perpendic, icon_value=icon_snap_perpendic.icon_id) 
 
+        
+        row.operator("tpc_ot.face_cursor", text="FaceCursor", icon='ORIENTATION_CURSOR')
+
+
 
         if addon_prefs.toggle_special_type_layout == 'flow': 
             row.label(text='')
@@ -172,12 +176,16 @@ def draw_snapset_menu_ui(context, layout):
                 row.operator("tpc_ot.snapset_modal", text=tx_snapset_perpendicm).mode = "PERPENDICULAR"
             else:
                 row.operator("tpc_ot.snapset_modal", text=tx_snapset_perpendicm, icon_value=icon_snap_perpendic.icon_id).mode = "PERPENDICULAR"  
-        
+                
+
         if addon_prefs.tpc_use_custom_modal_special == True:  
             if addon_prefs.toggle_special_name == 'namend': 
                 row.operator("tpc_ot.snapset_modal", text=tx_snapset_customM).mode = "CUSTOM"  
             else:
                 row.operator("tpc_ot.snapset_modal", text=tx_snapset_customM, icon_value=icon_snap_custom.icon_id).mode = "CUSTOM"  
+       
+        row.operator("tpc_ot.face_cursor_modal", text="FaceCursor*", icon='ORIENTATION_CURSOR')
+
 
         if addon_prefs.tpc_use_settings_special == True:  
             if addon_prefs.toggle_special_type_layout == 'column':                 
@@ -276,6 +284,11 @@ def draw_snapset_menu_ui(context, layout):
                         layout.operator("tpc_ot.snapset_button_h", text=tx_snapset_perpendic, icon=addon_prefs.icon_bth) 
                     else:          
                         layout.operator("tpc_ot.snapset_button_h", text=tx_snapset_perpendic, icon_value=icon_snap_perpendic.icon_id) 
+            
+            
+            layout.operator("tpc_ot.cursor_align", text="FaceCursor", icon='ORIENTATION_CURSOR')
+
+
 
         else:
 
@@ -316,6 +329,10 @@ def draw_snapset_menu_ui(context, layout):
                     layout.operator("tpc_ot.snapset_modal", text=tx_snapset_customM).mode = "CUSTOM"  
                 else:
                     layout.operator("tpc_ot.snapset_modal", text=tx_snapset_customM, icon_value=icon_snap_custom.icon_id).mode = "CUSTOM"  
+
+           
+            layout.operator("tpc_ot.face_cursor_modal", text="FaceCursor*", icon='ORIENTATION_CURSOR')
+
 
         if addon_prefs.tpc_use_separator_settings_special == True:              
             layout.separator()

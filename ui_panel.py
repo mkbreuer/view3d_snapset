@@ -120,7 +120,9 @@ def draw_snapset_ui(context, layout):
                     icon_snap_perpendic = icons.get("icon_snap_perpendic")            
                     row.operator("tpc_ot.snapset_button_h", text=tx_snapset_perpendic, icon_value=icon_snap_perpendic.icon_id) 
             
-            #row.operator("tpc_ot.cursor_object_align") 
+ 
+            row.operator("tpc_ot.face_cursor", text="FaceCursor*", icon='ORIENTATION_CURSOR')
+
 
         else:          
             row = box.row(align=True)
@@ -145,8 +147,10 @@ def draw_snapset_ui(context, layout):
             icon_snap_perpendic = icons.get("icon_snap_perpendic")
             row.operator("tpc_ot.snapset_modal", text="Perpendic*", icon_value=icon_snap_perpendic.icon_id).mode = "PERPENDICULAR"  
 
+            row.operator("tpc_ot.face_cursor_modal", text="FaceCursor*", icon='ORIENTATION_CURSOR')
+
             icon_snap_custom = icons.get("icon_snap_custom")    
-            row.operator("tpc_ot.snapset_modal", text="Custom*", icon_value=icon_snap_custom.icon_id).mode = "CUSTOM"  
+            row.operator("tpc_ot.snapset_modal", text="Modal Custom*", icon_value=icon_snap_custom.icon_id).mode = "CUSTOM"  
 
 
 
