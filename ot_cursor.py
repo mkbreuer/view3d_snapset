@@ -19,10 +19,12 @@ def func_cursor(self, context):
 
     bpy.context.preferences.edit.object_align=self.object_align
 
-    bpy.context.scene.tool_settings.use_snap = True
-    bpy.context.scene.tool_settings.snap_target = 'CLOSEST'
-    bpy.context.scene.tool_settings.snap_elements = {'FACE'}
-    bpy.context.scene.tool_settings.use_snap_align_rotation = True
+    bpy.context.scene.tool_settings.transform_pivot_point = 'MEDIAN_POINT'
+    bpy.context.scene.tool_settings.use_snap = True                
+    bpy.context.scene.tool_settings.snap_elements = {'VERTEX', 'EDGE', 'FACE'}
+    bpy.context.scene.tool_settings.snap_target = 'MEDIAN'
+    bpy.context.scene.tool_settings.use_snap_align_rotation = True     
+    bpy.context.scene.cursor.rotation_euler[2] = self.rotation
 
 
 class VIEW3D_OT_3d_cursor_align(bpy.types.Operator):
@@ -50,6 +52,7 @@ class VIEW3D_OT_3d_cursor_align(bpy.types.Operator):
                default = "CURSOR",
                description="")
         
+    rotation : FloatProperty(name="Rotate Cursor", description="", default=0, min= -360, max = 360, subtype='PERCENTAGE')
 
     def draw(self, context):
         layout = self.layout
@@ -73,6 +76,15 @@ class VIEW3D_OT_3d_cursor_align(bpy.types.Operator):
         row = box.row(align=True)  
         row.label(text="Align to")
         row.prop(self, "object_align", text='')
+ 
+        box.separator()
+
+        row = box.row(align=True)  
+        row.label(text="Rotation")
+        row.prop(self, "rotation", text='')
+ 
+        box.separator()
+
 
 
     def execute(self, context):
@@ -239,7 +251,7 @@ class VIEW3D_OT_face_cursor_modal(bpy.types.Operator):
         """use of a function and reload previous toolsettings when finished"""
         bl_idname = "tpc_ot.face_cursor_modal"
         bl_label = "Face Cursor"
-        #bl_options = {'REGISTER', 'UNDO'}
+        bl_options = {'REGISTER', 'UNDO'}
        
         depth : BoolProperty(name="Surface Project", description="project onto the surface", default=True)
 
@@ -260,6 +272,11 @@ class VIEW3D_OT_face_cursor_modal(bpy.types.Operator):
                    default = "CURSOR",
                    description="")
 
+        rotation : FloatProperty(name="Rotate Cursor", description="", default=0, min= -360, max = 360, subtype='PERCENTAGE')      
+
+        def modal(self, context, event):
+            context.area.tag_redraw()
+            context.area.header_text_set("Leftclick+Press: Snap Cursor, + Mousewheel: Rotate Cursor, Rightclick/ESC: Cancel")
 
         # print info in system console
         def __init__(self):
@@ -276,13 +293,12 @@ class VIEW3D_OT_face_cursor_modal(bpy.types.Operator):
             store_rotation : bpy.context.scene.tool_settings.use_snap_align_rotation
             store_project : bpy.context.scene.tool_settings.use_snap_project
             store_snap : bpy.context.scene.tool_settings.use_snap        
-       
+        
         running = False
        
         # get the context arguments         
         def modal(self, context, event):
-                        
-              
+                                      
             if event.value == "RELEASE" and self.running:               
                 # reload settings after event
                 bpy.context.scene.tool_settings.transform_pivot_point = self.store_pivot
@@ -293,16 +309,18 @@ class VIEW3D_OT_face_cursor_modal(bpy.types.Operator):
                 bpy.context.scene.tool_settings.use_snap = self.store_snap              
 
                 bpy.ops.wm.tool_set_by_id(name="builtin.move")                          
-                self.running = False    
-
+                self.running = False   
                 return {'FINISHED'}
+         
+            elif event.type == 'LEFTMOUSE' and event.value =="PRESS" and not self.running:           
+                self.running = True   
+                bpy.ops.wm.tool_set_by_id(name="builtin.cursor") 
 
-
-            # do event 
-            elif event.type == 'LEFTMOUSE' and event.value =="PRESS" and not self.running:
-                self.running = True                
-                bpy.ops.wm.tool_set_by_id(name="builtin.cursor")           
-                              
+                if event.type == 'WHEELUPMOUSE':
+                    bpy.context.scene.cursor.rotation_euler[2] = -self.rotation
+                
+                if event.type == 'WHEELDOWNMOUSE': 
+                    bpy.context.scene.cursor.rotation_euler[2] = self.rotation
 
             # do event
             elif event.type in {'RIGHTMOUSE', 'ESC'}:              
@@ -339,17 +357,17 @@ class VIEW3D_OT_face_cursor_modal(bpy.types.Operator):
                 self.store_project = bpy.context.scene.tool_settings.use_snap_project
                 self.store_snap = bpy.context.scene.tool_settings.use_snap
 
-
-                bpy.context.scene.tool_settings.use_snap = True
-                bpy.context.scene.tool_settings.snap_target = 'CLOSEST'
-                bpy.context.scene.tool_settings.snap_elements = {'FACE'}
+                bpy.context.scene.tool_settings.transform_pivot_point = 'MEDIAN_POINT'
+                bpy.context.scene.tool_settings.use_snap = True                
+                bpy.context.scene.tool_settings.snap_elements = {'VERTEX', 'EDGE', 'FACE'}
+                bpy.context.scene.tool_settings.snap_target = 'MEDIAN'
                 bpy.context.scene.tool_settings.use_snap_align_rotation = True      
               
                 bpy.context.space_data.overlay.show_cursor = True                
                 #https://docs.blender.org/api/current/bpy.ops.view3d.html    
                 bpy.ops.view3d.cursor3d(use_depth=self.depth, orientation=self.orient)
                 bpy.context.preferences.edit.object_align=self.object_align                
-            
+                bpy.context.scene.cursor.rotation_euler[2] = self.rotation                          
                 #bpy.ops.wm.tool_set_by_id(name="builtin.cursor")                  
                               
                 context.window_manager.modal_handler_add(self)          
