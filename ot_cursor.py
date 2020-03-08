@@ -9,26 +9,11 @@ import mathutils
 from mathutils import *
 
 
-def func_cursor(self, context):
-    bpy.context.space_data.overlay.show_cursor = True
 
-    bpy.ops.wm.tool_set_by_id(name="builtin.cursor")
-    
-    #https://docs.blender.org/api/current/bpy.ops.view3d.html    
-    bpy.ops.view3d.cursor3d(use_depth=self.depth, orientation=self.orient)
-
-    bpy.context.preferences.edit.object_align=self.object_align
-
-    bpy.context.scene.tool_settings.use_snap = True
-    bpy.context.scene.tool_settings.snap_target = 'CLOSEST'
-    bpy.context.scene.tool_settings.snap_elements = {'FACE'}
-    bpy.context.scene.tool_settings.use_snap_align_rotation = True
-
-
-class VIEW3D_OT_3d_cursor_align(bpy.types.Operator):
-    """get 3d cursor tool to align cursor to surface"""
-    bl_idname = "tpc_ot.face_cursor"
-    bl_label = "Cursor Align"
+class VIEW3D_OT_place_cursor(bpy.types.Operator):
+    """Default Snap PlaceCursor > Button I Settings"""
+    bl_idname = "tpc_ot.place_cursor"
+    bl_label = "PlaceCursor"
     bl_options = {"REGISTER", 'UNDO'}
 
     depth : BoolProperty(name="Surface Project", description="project onto the surface", default=True)
@@ -50,6 +35,7 @@ class VIEW3D_OT_3d_cursor_align(bpy.types.Operator):
                default = "CURSOR",
                description="")
         
+    rotation : FloatProperty(name="Rotate Cursor", description="", default=0, min= -360, max = 360, subtype='PERCENTAGE')
 
     def draw(self, context):
         layout = self.layout
@@ -73,10 +59,48 @@ class VIEW3D_OT_3d_cursor_align(bpy.types.Operator):
         row = box.row(align=True)  
         row.label(text="Align to")
         row.prop(self, "object_align", text='')
+ 
+        box.separator()
+
+        row = box.row(align=True)  
+        row.label(text="Rotation")
+        row.prop(self, "rotation", text='')
+ 
+        box.separator()
 
 
     def execute(self, context):
-        func_cursor(self, context)
+
+        addon_prefs = context.preferences.addons[__package__].preferences
+
+        bpy.context.scene.tool_settings.use_snap = addon_prefs.tpc_use_snap
+
+        bpy.context.space_data.overlay.show_cursor = True
+
+        bpy.ops.wm.tool_set_by_id(name="builtin.cursor")
+        
+        #https://docs.blender.org/api/current/bpy.ops.view3d.html    
+        bpy.ops.view3d.cursor3d(use_depth=self.depth, orientation=self.orient)
+        bpy.context.preferences.edit.object_align=self.object_align
+
+        bpy.context.scene.tool_settings.transform_pivot_point = addon_prefs.prop_bti_pivot 
+               
+        #bpy.context.scene.tool_settings.snap_elements = {'VERTEX', 'EDGE', 'FACE'}        
+        bpy.context.scene.tool_settings.snap_elements = {addon_prefs.prop_bti_elements}
+        
+        bpy.context.scene.tool_settings.snap_target = addon_prefs.prop_bti_target
+        bpy.context.scene.tool_settings.use_snap_align_rotation = addon_prefs.prop_bti_align_rotation  
+     
+        bpy.context.scene.tool_settings.use_transform_pivot_point_align = addon_prefs.prop_bti_use_pivot             
+        bpy.context.scene.tool_settings.use_snap_grid_absolute = addon_prefs.prop_bti_absolute_grid               
+        bpy.context.scene.tool_settings.use_snap_self = addon_prefs.prop_bti_snap_self     
+        bpy.context.scene.tool_settings.use_snap_project = addon_prefs.prop_bti_project
+        bpy.context.scene.tool_settings.use_snap_peel_object = addon_prefs.prop_bti_peel_object
+        bpy.context.scene.tool_settings.use_snap_translate = addon_prefs.prop_bti_translate
+        bpy.context.scene.tool_settings.use_snap_rotate = addon_prefs.prop_bti_rotation
+        bpy.context.scene.tool_settings.use_snap_scale = addon_prefs.prop_bti_scale
+      
+        bpy.context.scene.cursor.rotation_euler[2] = self.rotation
         return {'FINISHED'}  
 
 
@@ -235,11 +259,11 @@ class VIEW3D_OT_3d_cursor_copy(bpy.types.Operator):
         #return context.window_manager.invoke_props_popup(self, event)  
 
 
-class VIEW3D_OT_face_cursor_modal(bpy.types.Operator):
+class VIEW3D_OT_place_cursor_modal(bpy.types.Operator):
         """use of a function and reload previous toolsettings when finished"""
-        bl_idname = "tpc_ot.face_cursor_modal"
-        bl_label = "Face Cursor"
-        #bl_options = {'REGISTER', 'UNDO'}
+        bl_idname = "tpc_ot.place_cursor_modal"
+        bl_label = "PlaceCursor"
+        bl_options = {'REGISTER', 'UNDO'}
        
         depth : BoolProperty(name="Surface Project", description="project onto the surface", default=True)
 
@@ -260,6 +284,11 @@ class VIEW3D_OT_face_cursor_modal(bpy.types.Operator):
                    default = "CURSOR",
                    description="")
 
+        rotation : FloatProperty(name="Rotate Cursor", description="", default=0, min= -360, max = 360, subtype='PERCENTAGE')      
+
+        def modal(self, context, event):
+            context.area.tag_redraw()
+            context.area.header_text_set("Leftclick+Press: Snap Cursor, + Mousewheel: Rotate Cursor, Rightclick/ESC: Cancel")
 
         # print info in system console
         def __init__(self):
@@ -276,13 +305,12 @@ class VIEW3D_OT_face_cursor_modal(bpy.types.Operator):
             store_rotation : bpy.context.scene.tool_settings.use_snap_align_rotation
             store_project : bpy.context.scene.tool_settings.use_snap_project
             store_snap : bpy.context.scene.tool_settings.use_snap        
-       
+        
         running = False
        
         # get the context arguments         
         def modal(self, context, event):
-                        
-              
+                                      
             if event.value == "RELEASE" and self.running:               
                 # reload settings after event
                 bpy.context.scene.tool_settings.transform_pivot_point = self.store_pivot
@@ -293,16 +321,18 @@ class VIEW3D_OT_face_cursor_modal(bpy.types.Operator):
                 bpy.context.scene.tool_settings.use_snap = self.store_snap              
 
                 bpy.ops.wm.tool_set_by_id(name="builtin.move")                          
-                self.running = False    
-
+                self.running = False   
                 return {'FINISHED'}
+         
+            elif event.type == 'LEFTMOUSE' and event.value =="PRESS" and not self.running:           
+                self.running = True   
+                bpy.ops.wm.tool_set_by_id(name="builtin.cursor") 
 
-
-            # do event 
-            elif event.type == 'LEFTMOUSE' and event.value =="PRESS" and not self.running:
-                self.running = True                
-                bpy.ops.wm.tool_set_by_id(name="builtin.cursor")           
-                              
+                if event.type == 'WHEELUPMOUSE':
+                    bpy.context.scene.cursor.rotation_euler[2] = -self.rotation
+                
+                if event.type == 'WHEELDOWNMOUSE': 
+                    bpy.context.scene.cursor.rotation_euler[2] = self.rotation
 
             # do event
             elif event.type in {'RIGHTMOUSE', 'ESC'}:              
@@ -339,17 +369,17 @@ class VIEW3D_OT_face_cursor_modal(bpy.types.Operator):
                 self.store_project = bpy.context.scene.tool_settings.use_snap_project
                 self.store_snap = bpy.context.scene.tool_settings.use_snap
 
-
-                bpy.context.scene.tool_settings.use_snap = True
-                bpy.context.scene.tool_settings.snap_target = 'CLOSEST'
-                bpy.context.scene.tool_settings.snap_elements = {'FACE'}
+                bpy.context.scene.tool_settings.transform_pivot_point = 'MEDIAN_POINT'
+                bpy.context.scene.tool_settings.use_snap = True                
+                bpy.context.scene.tool_settings.snap_elements = {'VERTEX', 'EDGE', 'FACE'}
+                bpy.context.scene.tool_settings.snap_target = 'MEDIAN'
                 bpy.context.scene.tool_settings.use_snap_align_rotation = True      
               
                 bpy.context.space_data.overlay.show_cursor = True                
                 #https://docs.blender.org/api/current/bpy.ops.view3d.html    
                 bpy.ops.view3d.cursor3d(use_depth=self.depth, orientation=self.orient)
                 bpy.context.preferences.edit.object_align=self.object_align                
-            
+                bpy.context.scene.cursor.rotation_euler[2] = self.rotation                          
                 #bpy.ops.wm.tool_set_by_id(name="builtin.cursor")                  
                               
                 context.window_manager.modal_handler_add(self)          
@@ -365,8 +395,8 @@ class VIEW3D_OT_face_cursor_modal(bpy.types.Operator):
 # REGISTER #
 classes = (
     VIEW3D_OT_3d_cursor_copy,
-    VIEW3D_OT_3d_cursor_align,
-    VIEW3D_OT_face_cursor_modal,
+    VIEW3D_OT_place_cursor,
+    VIEW3D_OT_place_cursor_modal,
 )
 
 def register():

@@ -303,7 +303,13 @@ class VIEW3D_MT_snapset_menu_pie(bpy.types.Menu):
                     else:
                         row.label(text="No Selection!")                                  
                     row.operator("object.align", text="Loc+Rot XYZ")
-                    row.operator("tpc_ot.face_cursor_modal", text="FCursor", icon='ORIENTATION_CURSOR')                  
+
+                    if addon_prefs.tpc_use_pcursor_pie == True:
+                        if addon_prefs.use_internal_icon_bti == True:     
+                            row.operator("tpc_ot.place_cursor_modal", text=addon_prefs.name_bti, icon=addon_prefs.icon_bti) 
+                        else:       
+                            icon_snap_pcursor = icons.get("icon_snap_pcursor")           
+                            row.operator("tpc_ot.place_cursor_modal", text=addon_prefs.name_bti, icon_value=icon_snap_pcursor.icon_id) 
 
                     if addon_prefs.toggle_mirror_func == True:                         
 

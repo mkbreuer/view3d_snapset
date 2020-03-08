@@ -39,6 +39,7 @@ def draw_snapset_ui(context, layout):
             tx_snapset_retopo    = addon_prefs.name_btf
             tx_snapset_center    = addon_prefs.name_btg
             tx_snapset_perpendic = addon_prefs.name_bth
+            tx_snapset_pcursor   = addon_prefs.name_bti
 
         if addon_prefs.toggle_display_name_pl == 'icon_id':  
    
@@ -50,6 +51,7 @@ def draw_snapset_ui(context, layout):
             tx_snapset_retopo    = " "
             tx_snapset_center    = " "
             tx_snapset_perpendic = " " 
+            tx_snapset_pcursor   = " " 
 
  
         if snap_global.toggle_dropdown == False:        
@@ -120,9 +122,12 @@ def draw_snapset_ui(context, layout):
                     icon_snap_perpendic = icons.get("icon_snap_perpendic")            
                     row.operator("tpc_ot.snapset_button_h", text=tx_snapset_perpendic, icon_value=icon_snap_perpendic.icon_id) 
             
- 
-            row.operator("tpc_ot.face_cursor", text="FaceCursor*", icon='ORIENTATION_CURSOR')
-
+            if addon_prefs.tpc_use_pcursor == True: 
+                if addon_prefs.use_internal_icon_bti == True:
+                    row.operator("tpc_ot.place_cursor", text=tx_snapset_pcursor, icon=addon_prefs.icon_bti) 
+                else:
+                    icon_snap_pcursor = icons.get("icon_snap_pcursor")            
+                    row.operator("tpc_ot.place_cursor", text=tx_snapset_pcursor, icon_value=icon_snap_pcursor.icon_id) 
 
         else:          
             row = box.row(align=True)
@@ -147,7 +152,8 @@ def draw_snapset_ui(context, layout):
             icon_snap_perpendic = icons.get("icon_snap_perpendic")
             row.operator("tpc_ot.snapset_modal", text="Perpendic*", icon_value=icon_snap_perpendic.icon_id).mode = "PERPENDICULAR"  
 
-            row.operator("tpc_ot.face_cursor_modal", text="FaceCursor*", icon='ORIENTATION_CURSOR')
+            icon_snap_pcursor = icons.get("icon_snap_pcursor")
+            row.operator("tpc_ot.place_cursor_modal", text="PlaceCursor*", icon_value=icon_snap_pcursor.icon_id)
 
             icon_snap_custom = icons.get("icon_snap_custom")    
             row.operator("tpc_ot.snapset_modal", text="Modal Custom*", icon_value=icon_snap_custom.icon_id).mode = "CUSTOM"  
