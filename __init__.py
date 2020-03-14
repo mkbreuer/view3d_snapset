@@ -23,7 +23,7 @@
 bl_info = {
     "name": "SnapSet",
     "author": "marvin.k.breuer (MKB)",
-    "version": (0, 3, 0),
+    "version": (0, 3, 1),
     "blender": (2, 81, 0),
     "location": "3D View > Sidebar [N], Menu [SHIFT+W], Special Menu [W], Shortcut [F], in Header and Snap Settings",
     "description": "full customizable buttons for snapping task",
@@ -2315,7 +2315,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
 
                 row = box.row(align=False)                    
                 row.prop(self, "use_internal_icon_bta", text="Use Internal or Custom Icon")     
-                row.operator('wm.url_open', text = '', icon='BLENDER').url = "https://raw.githubusercontent.com/mkbreuer/TP-Courier/master/reference%20sheets/blender_internal_icons_2.80.png"
+                row.operator('wm.url_open', text = '', icon='BLENDER').url = "https://raw.githubusercontent.com/mkbreuer/ToolPlus/master/icons_sheets/blender_internal_icons_2.80.png"
 
                 box.separator()              
                     
@@ -2376,7 +2376,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
 
                 row = box.row(align=False)                    
                 row.prop(self, "use_internal_icon_btb", text="Use Internal or Custom Icon")     
-                row.operator('wm.url_open', text = '', icon='BLENDER').url = "https://raw.githubusercontent.com/mkbreuer/TP-Courier/master/reference%20sheets/blender_internal_icons_2.80.png"
+                row.operator('wm.url_open', text = '', icon='BLENDER').url = "https://raw.githubusercontent.com/mkbreuer/ToolPlus/master/icons_sheets/blender_internal_icons_2.80.png"
 
                 box.separator()              
                     
@@ -2437,7 +2437,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
 
                 row = box.row(align=False)                    
                 row.prop(self, "use_internal_icon_btc", text="Use Internal or Custom Icon")     
-                row.operator('wm.url_open', text = '', icon='BLENDER').url = "https://raw.githubusercontent.com/mkbreuer/TP-Courier/master/reference%20sheets/blender_internal_icons_2.80.png"
+                row.operator('wm.url_open', text = '', icon='BLENDER').url = "https://raw.githubusercontent.com/mkbreuer/ToolPlus/master/icons_sheets/blender_internal_icons_2.80.png"
 
                 box.separator()              
                             
@@ -2498,7 +2498,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
 
                 row = box.row(align=False)                    
                 row.prop(self, "use_internal_icon_btd", text="Use Internal or Custom Icon")     
-                row.operator('wm.url_open', text = '', icon='BLENDER').url = "https://raw.githubusercontent.com/mkbreuer/TP-Courier/master/reference%20sheets/blender_internal_icons_2.80.png"
+                row.operator('wm.url_open', text = '', icon='BLENDER').url = "https://raw.githubusercontent.com/mkbreuer/ToolPlus/master/icons_sheets/blender_internal_icons_2.80.png"
                             
                 box.separator()              
 
@@ -2559,7 +2559,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
 
                 row = box.row(align=False)                    
                 row.prop(self, "use_internal_icon_bte", text="Use Internal or Custom Icon")     
-                row.operator('wm.url_open', text = '', icon='BLENDER').url = "https://raw.githubusercontent.com/mkbreuer/TP-Courier/master/reference%20sheets/blender_internal_icons_2.80.png"
+                row.operator('wm.url_open', text = '', icon='BLENDER').url = "https://raw.githubusercontent.com/mkbreuer/ToolPlus/master/icons_sheets/blender_internal_icons_2.80.png"
 
                 box.separator()              
                             
@@ -2621,7 +2621,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
 
                 row = box.row(align=False)                    
                 row.prop(self, "use_internal_icon_btf", text="Use Internal or Custom Icon")     
-                row.operator('wm.url_open', text = '', icon='BLENDER').url = "https://raw.githubusercontent.com/mkbreuer/TP-Courier/master/reference%20sheets/blender_internal_icons_2.80.png"
+                row.operator('wm.url_open', text = '', icon='BLENDER').url = "https://raw.githubusercontent.com/mkbreuer/ToolPlus/master/icons_sheets/blender_internal_icons_2.80.png"
                             
                 box.separator()              
 
@@ -2683,7 +2683,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
 
                 row = box.row(align=False)                    
                 row.prop(self, "use_internal_icon_btg", text="Use Internal or Custom Icon")     
-                row.operator('wm.url_open', text = '', icon='BLENDER').url = "https://raw.githubusercontent.com/mkbreuer/TP-Courier/master/reference%20sheets/blender_internal_icons_2.80.png"                           
+                row.operator('wm.url_open', text = '', icon='BLENDER').url = "https://raw.githubusercontent.com/mkbreuer/ToolPlus/master/icons_sheets/blender_internal_icons_2.80.png"                           
 
                 box.separator()              
 
@@ -2744,7 +2744,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
 
                 row = box.row(align=False)                    
                 row.prop(self, "use_internal_icon_bth", text="Use Internal or Custom Icon")     
-                row.operator('wm.url_open', text = '', icon='BLENDER').url = "https://raw.githubusercontent.com/mkbreuer/TP-Courier/master/reference%20sheets/blender_internal_icons_2.80.png"
+                row.operator('wm.url_open', text = '', icon='BLENDER').url = "https://raw.githubusercontent.com/mkbreuer/ToolPlus/master/icons_sheets/blender_internal_icons_2.80.png"
 
                 box.separator()              
                             
@@ -2805,7 +2805,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
 
                 row = box.row(align=False)                    
                 row.prop(self, "use_internal_icon_bti", text="Use Internal or Custom Icon")     
-                row.operator('wm.url_open', text = '', icon='BLENDER').url = "https://raw.githubusercontent.com/mkbreuer/TP-Courier/master/reference%20sheets/blender_internal_icons_2.80.png"
+                row.operator('wm.url_open', text = '', icon='BLENDER').url = "https://raw.githubusercontent.com/mkbreuer/ToolPlus/master/icons_sheets/blender_internal_icons_2.80.png"
 
                 box.separator()              
                             
@@ -2893,7 +2893,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
 
                 row = box.row(align=False)                    
                 row.prop(self, "use_internal_icon_btM", text="Use Internal or Custom Icon")     
-                row.operator('wm.url_open', text = '', icon='BLENDER').url = "https://raw.githubusercontent.com/mkbreuer/TP-Courier/master/reference%20sheets/blender_internal_icons_2.80.png"
+                row.operator('wm.url_open', text = '', icon='BLENDER').url = "https://raw.githubusercontent.com/mkbreuer/ToolPlus/master/icons_sheets/blender_internal_icons_2.80.png"
 
                 box.separator()              
                             
@@ -2949,7 +2949,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
             row = box.row(align=True)
             row.prop(snap_global, 'toggle_iconchange', text="", icon ="INFO")
             row.label(text="< Changing Icons !")
-            row.operator('wm.url_open', text="", icon='BLENDER').url = "https://raw.githubusercontent.com/mkbreuer/TP-Courier/master/reference%20sheets/blender_internal_icons_2.80.png"
+            row.operator('wm.url_open', text="", icon='BLENDER').url = "https://raw.githubusercontent.com/mkbreuer/ToolPlus/master/icons_sheets/blender_internal_icons_2.80.png"
        
             box.separator()            
 
