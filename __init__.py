@@ -29,7 +29,7 @@ bl_info = {
     "description": "full customizable buttons for snapping task",
     "warning": "",
     "wiki_url": "https://github.com/mkbreuer/view3d_snapset",
-    "category": "User Tools",
+    "category": "3D View",
 }
 
 
