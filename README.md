@@ -1,12 +1,17 @@
 # SnapSet
 Full customizable buttons for snapping task
 
+The download go to https://github.com/mkbreuer/view3d_snapset/releases
+
+
 !! Attention !!
 
-During the source code zip download, github adding a hyphen into the folder name: view3d_snapset-0.2.9
+When downloading the master repository, than github adding a the suffix master to the zip file.
 
-Blender cannot read this!
+view3d_snapset-master.zip
 
-Open the zip and change the dash to a underscore view3d_snapset_0.2.9
+This master suffix has to be removed from the addon name or it cause an error message with installation.
 
-If you zip it now and install it, everthing is fine!
+Extract the zip, remove master and zip the addon again.
+
+If you install it now, everthing is fine!
