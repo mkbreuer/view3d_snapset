@@ -47,6 +47,13 @@ def load_icons():
     mkb_icons.load("icon_align_zx", os.path.join(icons_dir, "align_zx.png"), 'IMAGE')    
     mkb_icons.load("icon_align_zy", os.path.join(icons_dir, "align_zy.png"), 'IMAGE')   
 
+    mkb_icons.load("icon_event_x", os.path.join(icons_dir, "event_x.png"), 'IMAGE')    
+    mkb_icons.load("icon_event_y", os.path.join(icons_dir, "event_y.png"), 'IMAGE')    
+    mkb_icons.load("icon_event_z", os.path.join(icons_dir, "event_z.png"), 'IMAGE')    
+    mkb_icons.load("icon_event_xy", os.path.join(icons_dir, "event_xy.png"), 'IMAGE')    
+    mkb_icons.load("icon_event_zx", os.path.join(icons_dir, "event_zx.png"), 'IMAGE')    
+    mkb_icons.load("icon_event_zy", os.path.join(icons_dir, "event_zy.png"), 'IMAGE')  
+
     mkb_icons.load("icon_align_n", os.path.join(icons_dir, "align_n.png"), 'IMAGE')  
 
     mkb_icons.load("icon_align_distribute", os.path.join(icons_dir, "align_distribute.png"), 'IMAGE')   

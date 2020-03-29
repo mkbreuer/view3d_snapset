@@ -129,22 +129,22 @@ def func_cursor_copy(self, context):
 
             else:
                 if self.copy_rot_x == True:
-                    obj.rotation_euler[0] = bpy.context.scene.cursor.rotation_euler[0]
+                    obj.rotation_euler[1] = bpy.context.scene.cursor.rotation_euler[0]
                     rot_x = 'X'                   
                 else:                        
-                    rot_x = '-' 
+                    rot_x = '' 
 
                 if self.copy_rot_y == True:
-                    obj.rotation_euler[1] = bpy.context.scene.cursor.rotation_euler[1]         
+                    obj.rotation_euler[0] = bpy.context.scene.cursor.rotation_euler[1]         
                     rot_y = 'Y'                                        
                 else:                        
-                    rot_y = '-' 
+                    rot_y = '' 
 
                 if self.copy_rot_z == True:
                     obj.rotation_euler[2] = bpy.context.scene.cursor.rotation_euler[2]
                     rot_z = 'Z'                    
                 else:                        
-                    rot_z = '-'                   
+                    rot_z = ''                   
 
 
             # LOCATION             
@@ -159,22 +159,22 @@ def func_cursor_copy(self, context):
             else:
 
                 if self.copy_loc_x == True:
-                    obj.location[0] = bpy.context.scene.cursor.location[0]
+                    obj.location[1] = bpy.context.scene.cursor.location[0]
                     loc_x = 'X'     
                 else:
                     loc_x = '-'                    
  
                 if self.copy_loc_y == True:
-                    obj.location[1] = bpy.context.scene.cursor.location[1]         
+                    obj.location[0] = bpy.context.scene.cursor.location[1]         
                     loc_y = 'Y'                   
                 else:
-                    loc_y = '-'   
+                    loc_y = ''   
 
                 if self.copy_loc_z == True:
                     obj.location[2] = bpy.context.scene.cursor.location[2]
                     loc_z = 'Z'                    
                 else:
-                    loc_z = '-'   
+                    loc_z = ''   
 
        
           

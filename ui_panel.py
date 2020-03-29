@@ -87,13 +87,6 @@ def draw_snapset_ui(context, layout):
                         button_snap_retopo = icons.get("icon_snap_retopo")
                         row.operator("tpc_ot.snapset_button_f", text=tx_snapset_retopo, icon_value=button_snap_retopo.icon_id)    
 
-            if addon_prefs.tpc_use_cursor == True:
-                if addon_prefs.use_internal_icon_btc == True:     
-                    row.operator("tpc_ot.snapset_button_c", text=tx_snapset_cursor, icon=addon_prefs.icon_btc) 
-                else:       
-                    button_snap_cursor = icons.get("icon_snap_cursor")           
-                    row.operator("tpc_ot.snapset_button_c", text=tx_snapset_cursor, icon_value=button_snap_cursor.icon_id)          
-
             if addon_prefs.tpc_use_active == True: 
                 if addon_prefs.use_internal_icon_btd == True:
                     row.operator("tpc_ot.snapset_button_d", text=tx_snapset_active, icon=addon_prefs.icon_btd) 
@@ -121,6 +114,13 @@ def draw_snapset_ui(context, layout):
                 else:
                     icon_snap_perpendic = icons.get("icon_snap_perpendic")            
                     row.operator("tpc_ot.snapset_button_h", text=tx_snapset_perpendic, icon_value=icon_snap_perpendic.icon_id) 
+
+            if addon_prefs.tpc_use_cursor == True:
+                if addon_prefs.use_internal_icon_btc == True:     
+                    row.operator("tpc_ot.snapset_button_c", text=tx_snapset_cursor, icon=addon_prefs.icon_btc) 
+                else:       
+                    button_snap_cursor = icons.get("icon_snap_cursor")           
+                    row.operator("tpc_ot.snapset_button_c", text=tx_snapset_cursor, icon_value=button_snap_cursor.icon_id)          
             
             if addon_prefs.tpc_use_pcursor == True: 
                 if addon_prefs.use_internal_icon_bti == True:

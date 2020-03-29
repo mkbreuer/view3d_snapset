@@ -23,7 +23,7 @@
 bl_info = {
     "name": "SnapSet",
     "author": "marvin.k.breuer (MKB)",
-    "version": (0, 3, 1),
+    "version": (0, 3, 2),
     "blender": (2, 81, 0),
     "location": "3D View > Sidebar [N], Menu [SHIFT+W], Special Menu [W], Shortcut [F], in Header and Snap Settings",
     "description": "full customizable buttons for snapping task",
@@ -55,6 +55,7 @@ from . ui_utils import addon_exists
 from . icons.icons  import load_icons
 from . icons.icons  import clear_icons
 
+from .ot_axis       import *
 from .ot_custom     import *
 from .ot_keymap     import *
 from .ot_modal      import *
@@ -65,7 +66,8 @@ from .ot_cursor     import *
 from .ui_editor     import *
 from .ui_keymap     import *
 from .ui_menu       import *
-from .ui_menu_pie   import *
+from .ui_menu_pie_1 import *
+from .ui_menu_pie_2 import *
 from .ui_panel      import *
 from .ui_snapping   import *
 from .ui_utils      import *
@@ -274,6 +276,9 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                ('pie',    'Pie Menu',  'enable pie for 3D View')),
         default='menu', update = update_snapset_menu)
 
+    toggle_pie_layout : BoolProperty(name="Layout 1/2", description="pie menu layout", default=True)   
+    toggle_button_switch : BoolProperty(name="Durables/Modals*", description="switch buttons in pie menu", default=False)   
+
     hotkey_menu : StringProperty(name = 'Key', default="W", description = 'change hotkey / only capital letters allowed') 
     hotkey_menu_ctrl : BoolProperty(name= 'use Ctrl', description = 'enable / disable', default=False) 
     hotkey_menu_alt : BoolProperty(name= 'use Alt', description = 'enable / disable', default=False) 
@@ -304,23 +309,23 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
     tpc_show_orientation_panel : BoolProperty(name= 'Toggle Menu/Panel', description = 'on/off', default=True)  
     tpc_show_orientation_name : BoolProperty(name= 'Toggle Menu/Panel', description = 'on/off', default=False)  
 
-    ui_scale_x_b1 : FloatProperty(name="Scale X", description="scale box in pie menu", default=1.10, min=0.00, max=2.00, precision=2)
-    ui_scale_x_b2 : FloatProperty(name="Scale X", description="scale box in pie menu", default=1.02, min=0.00, max=2.00, precision=2)
-    ui_scale_x_b3 : FloatProperty(name="Scale X", description="scale box in pie menu", default=1.05, min=0.00, max=2.00, precision=2)
-    ui_scale_x_b4 : FloatProperty(name="Scale X", description="scale box in pie menu", default=0.65, min=0.00, max=2.00, precision=2)
-    ui_scale_x_b5 : FloatProperty(name="Scale X", description="scale box in pie menu", default=0.65, min=0.00, max=2.00, precision=2)
-    ui_scale_x_b6 : FloatProperty(name="Scale X", description="scale box in pie menu", default=0.65, min=0.00, max=2.00, precision=2)
-    ui_scale_x_b7 : FloatProperty(name="Scale X", description="scale box in pie menu", default=1.10, min=0.00, max=2.00, precision=2)
-    ui_scale_x_b8 : FloatProperty(name="Scale X", description="scale box in pie menu", default=1.10, min=0.00, max=2.00, precision=2)
+    ui_scale_x_b1 : FloatProperty(name="Scale X", description="scale box in pie menu", default=1.20, min=0.00, max=4.00, precision=2)
+    ui_scale_x_b2 : FloatProperty(name="Scale X", description="scale box in pie menu", default=1.20, min=0.00, max=4.00, precision=2)
+    ui_scale_x_b3 : FloatProperty(name="Scale X", description="scale box in pie menu", default=1.05, min=0.00, max=4.00, precision=2)
+    ui_scale_x_b4 : FloatProperty(name="Scale X", description="scale box in pie menu", default=0.65, min=0.00, max=4.00, precision=2)
+    ui_scale_x_b5 : FloatProperty(name="Scale X", description="scale box in pie menu", default=0.65, min=0.00, max=4.00, precision=2)
+    ui_scale_x_b6 : FloatProperty(name="Scale X", description="scale box in pie menu", default=0.65, min=0.00, max=4.00, precision=2)
+    ui_scale_x_b7 : FloatProperty(name="Scale X", description="scale box in pie menu", default=1.20, min=0.00, max=4.00, precision=2)
+    ui_scale_x_b8 : FloatProperty(name="Scale X", description="scale box in pie menu", default=1.20, min=0.00, max=4.00, precision=2)
 
-    ui_scale_y_b1 : FloatProperty(name="Scale Y", description="scale box in pie menu", default=1.00, min=0.00, max=2.00, precision=2)
-    ui_scale_y_b2 : FloatProperty(name="Scale Y", description="scale box in pie menu", default=1.00, min=0.00, max=2.00, precision=2)
-    ui_scale_y_b3 : FloatProperty(name="Scale Y", description="scale box in pie menu", default=1.00, min=0.00, max=2.00, precision=2)
-    ui_scale_y_b4 : FloatProperty(name="Scale Y", description="scale box in pie menu", default=1.00, min=0.00, max=2.00, precision=2)
-    ui_scale_y_b5 : FloatProperty(name="Scale Y", description="scale box in pie menu", default=1.00, min=0.00, max=2.00, precision=2)
-    ui_scale_y_b6 : FloatProperty(name="Scale y", description="scale box in pie menu", default=1.00, min=0.00, max=2.00, precision=2)
-    ui_scale_y_b7 : FloatProperty(name="Scale Y", description="scale box in pie menu", default=1.00, min=0.00, max=2.00, precision=2)
-    ui_scale_y_b8 : FloatProperty(name="Scale Y", description="scale box in pie menu", default=1.00, min=0.00, max=2.00, precision=2)
+    ui_scale_y_b1 : FloatProperty(name="Scale Y", description="scale box in pie menu", default=1.10, min=0.00, max=4.00, precision=2)
+    ui_scale_y_b2 : FloatProperty(name="Scale Y", description="scale box in pie menu", default=1.10, min=0.00, max=4.00, precision=2)
+    ui_scale_y_b3 : FloatProperty(name="Scale Y", description="scale box in pie menu", default=1.00, min=0.00, max=4.00, precision=2)
+    ui_scale_y_b4 : FloatProperty(name="Scale Y", description="scale box in pie menu", default=1.00, min=0.00, max=4.00, precision=2)
+    ui_scale_y_b5 : FloatProperty(name="Scale Y", description="scale box in pie menu", default=1.00, min=0.00, max=4.00, precision=2)
+    ui_scale_y_b6 : FloatProperty(name="Scale y", description="scale box in pie menu", default=1.00, min=0.00, max=4.00, precision=2)
+    ui_scale_y_b7 : FloatProperty(name="Scale Y", description="scale box in pie menu", default=1.10, min=0.00, max=4.00, precision=2)
+    ui_scale_y_b8 : FloatProperty(name="Scale Y", description="scale box in pie menu", default=1.10, min=0.00, max=4.00, precision=2)
 
 
     #------------------------------
@@ -658,7 +663,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
     
 
     # BUTTON C = 3D CURSOR #
-    name_btc : StringProperty(default="Cursor") 
+    name_btc : StringProperty(default="3D Cursor") 
     icon_btc : StringProperty(default="BLENDER") 
     use_internal_icon_btc : BoolProperty(name= 'Internal Icon', description = '', default=False)  
 
@@ -1468,6 +1473,12 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                 box.separator() 
 
                 if self.toggle_keymap_type == 'pie': 
+
+                    row = box.row(align=True)
+                    row.prop(self, "toggle_pie_layout", text='')  
+                    row.label(text="Toggle Pie Menu Layout Type 1/2  (Need Blender Restart!)")  
+         
+                    box.separator()  
                                                   
                     row = box.column(align=True)                                                                  
                     row.prop(self, 'tpc_use_emposs')
@@ -1476,7 +1487,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
 
                     row = box.row(align=True)
                     row.prop(snap_global, "toggle_pie_buttons", text='')  
-                    row.label(text="Toggle Pie Buttons")  
+                    row.label(text="Toggle Pie Menu Buttons")  
          
                     box.separator()  
                     
@@ -3036,6 +3047,10 @@ class Global_Property_Group(bpy.types.PropertyGroup):
 
     set_orientation_name : StringProperty(name="User Input", default="Custom", description="")
 
+    use_axis_align : BoolProperty(name="Align to Axis", description="align selected mesh to x,y,z world axis", default = False)
+   
+    toggle_button_switch : BoolProperty(name="Durables/Modals*", description="switch buttons in pie menu", default=False)   
+
 
 # REGISTER #
 classes = (
@@ -3056,7 +3071,8 @@ classes = (
     VIEW3D_OT_snap_use,
     VIEW3D_MT_snapset_menu,
     VIEW3D_MT_snapset_menu_panel,
-    VIEW3D_MT_snapset_menu_pie,
+    VIEW3D_MT_snapset_menu_pie_1,
+    VIEW3D_MT_snapset_menu_pie_2,
     VIEW3D_PT_snapset_panel_ui,
     VIEW3D_MT_snapset_menu_pencil,
     VIEW3D_MT_snapset_menu_editor,
@@ -3064,6 +3080,7 @@ classes = (
     VIEW3D_MT_snapset_menu_special,
     VIEW3D_MT_snapset_menu_snapping,
     VIEW3D_OT_align_tools,
+    VIEW3D_OT_align_object_to_axis,
     VIEW3D_OT_align_mesh,
     VIEW3D_OT_looptools,
     VIEW3D_OT_3d_cursor_copy,

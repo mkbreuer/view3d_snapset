@@ -42,15 +42,16 @@ class VIEW3D_MT_snapset_menu_pencil(bpy.types.Menu):
 
 
 # UI: HOTKEY MENU PIE # 
-class VIEW3D_MT_snapset_menu_pie(bpy.types.Menu):
+class VIEW3D_MT_snapset_menu_pie_1(bpy.types.Menu):
     bl_label = "SnapSet"
-    bl_idname = "VIEW3D_MT_snapset_menu_pie"
+    bl_idname = "VIEW3D_MT_snapset_menu_pie_1"
 
     def draw(self, context):
         layout = self.layout
        
         addon_prefs = get_addon_prefs()
-
+        snap_global = context.window_manager.snap_global_props   
+       
         icons = load_icons()  
 
         layout.operator_context = 'INVOKE_REGION_WIN'
@@ -404,41 +405,89 @@ class VIEW3D_MT_snapset_menu_pie(bpy.types.Menu):
                         row = box.row(align = False)
                         row.label(text="Align to Axis: 0")
 
-                    row = box.row(align=True)
+                    if snap_global.use_axis_align == False:
+                    
+                        row = box.row(align=True)
 
-                    button_align_x = icons.get("icon_align_x") 
-                    props = row.operator("tpc_ops.align_mesh", text="X", icon_value=button_align_x.icon_id)
-                    props.use_align_axis='axis_x'
-                    props.set_pivot='ACTIVE_ELEMENT'
+                        button_align_x = icons.get("icon_align_x") 
+                        props = row.operator("tpc_ot.align_mesh", text="X", icon_value=button_align_x.icon_id)
+                        props.use_align_axis='axis_x'
+                        props.set_pivot='ACTIVE_ELEMENT'
 
-                    button_align_y = icons.get("icon_align_y")
-                    props = row.operator("tpc_ops.align_mesh",text="Y", icon_value=button_align_y.icon_id)
-                    props.use_align_axis='axis_y'
-                    props.set_pivot='ACTIVE_ELEMENT'
+                        button_align_y = icons.get("icon_align_y")
+                        props = row.operator("tpc_ot.align_mesh",text="Y", icon_value=button_align_y.icon_id)
+                        props.use_align_axis='axis_y'
+                        props.set_pivot='ACTIVE_ELEMENT'
 
-                    button_align_z = icons.get("icon_align_z")
-                    props = row.operator("tpc_ops.align_mesh",text="Z", icon_value=button_align_z.icon_id)
-                    props.use_align_axis='axis_z'   
-                    props.set_pivot='ACTIVE_ELEMENT'
+                        button_align_z = icons.get("icon_align_z")
+                        props = row.operator("tpc_ot.align_mesh",text="Z", icon_value=button_align_z.icon_id)
+                        props.use_align_axis='axis_z'   
+                        props.set_pivot='ACTIVE_ELEMENT' 
 
-                    row = box.row(align=True)
+                        row = box.row(align=True)
 
-                    button_align_xy = icons.get("icon_align_xy") 
-                    props = row.operator("tpc_ops.align_mesh", text="Xy", icon_value=button_align_xy.icon_id)
-                    props.use_align_axis='axis_xy'
-                    props.set_pivot='ACTIVE_ELEMENT'
+                        button_align_xy = icons.get("icon_align_xy") 
+                        props = row.operator("tpc_ot.align_mesh", text="Xy", icon_value=button_align_xy.icon_id)
+                        props.use_align_axis='axis_xy'
+                        props.set_pivot='ACTIVE_ELEMENT'
 
-                    button_align_zy = icons.get("icon_align_zy") 
-                    props = row.operator("tpc_ops.align_mesh", text="Zy", icon_value=button_align_zy.icon_id)
-                    props.use_align_axis='axis_zy'
-                    props.set_pivot='ACTIVE_ELEMENT'
+                        button_align_zy = icons.get("icon_align_zy") 
+                        props = row.operator("tpc_ot.align_mesh", text="Zy", icon_value=button_align_zy.icon_id)
+                        props.use_align_axis='axis_zy'
+                        props.set_pivot='ACTIVE_ELEMENT'
 
-                    button_align_zx = icons.get("icon_align_zx")
-                    props = row.operator("tpc_ops.align_mesh", text="Zx", icon_value=button_align_zx.icon_id)
-                    props.use_align_axis='axis_zx'
-                    props.set_pivot='ACTIVE_ELEMENT'    
+                        button_align_zx = icons.get("icon_align_zx")
+                        props = row.operator("tpc_ot.align_mesh", text="Zx", icon_value=button_align_zx.icon_id)
+                        props.use_align_axis='axis_zx'
+                        props.set_pivot='ACTIVE_ELEMENT'
 
-                    box.separator()   
+                        box.separator()      
+
+                    else:
+
+                        row = box.row(align=True)
+
+                        button_align_x = icons.get("icon_align_x") 
+                        props = row.operator("tpc_ot.align_mesh_to_axis", text="X", icon_value=button_align_x.icon_id)
+                        props.use_align_axis_x=True   
+                        props.use_align_axis_y=False   
+                        props.use_align_axis_z=False     
+                    
+                        button_align_y = icons.get("icon_align_y")
+                        props = row.operator("tpc_ot.align_mesh_to_axis",text="Y", icon_value=button_align_y.icon_id)
+                        props.use_align_axis_x=False   
+                        props.use_align_axis_y=True   
+                        props.use_align_axis_z=False    
+
+                        button_align_z = icons.get("icon_align_z")
+                        props = row.operator("tpc_ot.align_mesh_to_axis",text="Z", icon_value=button_align_z.icon_id)
+                        props.use_align_axis_x=False   
+                        props.use_align_axis_y=False   
+                        props.use_align_axis_z=True     
+                        
+                        row = box.row(align=True)
+
+                        button_align_xy = icons.get("icon_align_xy") 
+                        props = row.operator("tpc_ot.align_mesh_to_axis", text="Xy", icon_value=button_align_xy.icon_id)
+                        props.use_align_axis_x=True   
+                        props.use_align_axis_y=True   
+                        props.use_align_axis_z=False     
+
+                        button_align_zy = icons.get("icon_align_zy") 
+                        props = row.operator("tpc_ot.align_mesh_to_axis", text="Zy", icon_value=button_align_zy.icon_id)
+                        props.use_align_axis_x=False   
+                        props.use_align_axis_y=True   
+                        props.use_align_axis_z=True     
+
+                        button_align_zx = icons.get("icon_align_zx")
+                        props = row.operator("tpc_ot.align_mesh_to_axis", text="Zx", icon_value=button_align_zx.icon_id)
+                        props.use_align_axis_x=True   
+                        props.use_align_axis_y=False   
+                        props.use_align_axis_z=True     
+
+                        box.separator()      
+
+  
                  
                     if addon_prefs.toggle_alignmesh_compact == False:  
                         row = box.row(align = False)
@@ -462,13 +511,14 @@ class VIEW3D_MT_snapset_menu_pie(bpy.types.Menu):
                         row.label(text="Align to active Normal & Mirror over Edge")
 
                     row = box.row(align=True)
+                    row.operator("tpc_ot.mirror_over_edge", text="Edge Mirror", icon='ARROW_LEFTRIGHT')                    
 
                     button_align_n = icons.get("icon_align_n") 
-                    props = row.operator("tpc_ops.align_mesh", text="Align to Normal", icon_value=button_align_n.icon_id)
+                    props = row.operator("tpc_ot.align_mesh", text="Align to Normal", icon_value=button_align_n.icon_id)
                     props.use_align_axis='axis_n'
                     props.set_pivot='ACTIVE_ELEMENT'
                   
-                    row.operator("tpc_ot.mirror_over_edge", text="Edge Mirror", icon='ARROW_LEFTRIGHT')
+                    row.prop(snap_global, 'use_axis_align' , text='', icon='AXIS_TOP')
                     
                     if addon_prefs.toggle_mirror_func == True:                         
                     
@@ -536,17 +586,17 @@ class VIEW3D_MT_snapset_menu_pie(bpy.types.Menu):
                     row = box.row(align=True)
 
                     button_align_x = icons.get("icon_align_x") 
-                    props = row.operator("tpc_ops.snapflat_modal", text="FX*", icon_value=button_align_x.icon_id)
+                    props = row.operator("tpc_ot.snapflat_modal", text="FX*", icon_value=button_align_x.icon_id)
                     props.mode='flatten_x'
                     props.mesh_select_mode=addon_prefs.mesh_select_mode
 
                     button_align_y = icons.get("icon_align_y")
-                    props = row.operator("tpc_ops.snapflat_modal",text="FY*", icon_value=button_align_y.icon_id)
+                    props = row.operator("tpc_ot.snapflat_modal",text="FY*", icon_value=button_align_y.icon_id)
                     props.mode='flatten_y'
                     props.mesh_select_mode=addon_prefs.mesh_select_mode
 
                     button_align_z = icons.get("icon_align_z")
-                    props = row.operator("tpc_ops.snapflat_modal",text="FZ*", icon_value=button_align_z.icon_id)
+                    props = row.operator("tpc_ot.snapflat_modal",text="FZ*", icon_value=button_align_z.icon_id)
                     props.mode='flatten_z'
                     props.mesh_select_mode=addon_prefs.mesh_select_mode 
              
@@ -562,7 +612,7 @@ class VIEW3D_MT_snapset_menu_pie(bpy.types.Menu):
                             sub = row.row(align=True)
                             sub.scale_x = 1                            
                             icon_align_flatten = icons.get("icon_align_flatten") 
-                            props = sub.operator("tpc_ops.snapflat_modal", text=" LPT Flatten*", icon_value=icon_align_flatten.icon_id)
+                            props = sub.operator("tpc_ot.snapflat_modal", text=" LPT Flatten*", icon_value=icon_align_flatten.icon_id)
                             props.mode='flatten_lpt'
                             props.mesh_select_mode=addon_prefs.mesh_select_mode
                             props.threshold=addon_prefs.threshold
@@ -584,17 +634,17 @@ class VIEW3D_MT_snapset_menu_pie(bpy.types.Menu):
                             
                             row = box.row(align=True)  
 
-                            props = row.operator("tpc_ops.snapflat_modal", text="Select*", icon='RESTRICT_SELECT_OFF')
+                            props = row.operator("tpc_ot.snapflat_modal", text="Select*", icon='RESTRICT_SELECT_OFF')
                             props.mode='snap_for_select'                          
                             props.mesh_select_mode=addon_prefs.mesh_select_mode
                             props.threshold=addon_prefs.threshold
 
-                            props = row.operator("tpc_ops.snapflat_modal", text="Seam*", icon='UV_FACESEL')
+                            props = row.operator("tpc_ot.snapflat_modal", text="Seam*", icon='UV_FACESEL')
                             props.mode='snap_for_uvs'                          
                             props.mesh_select_mode=addon_prefs.mesh_select_mode
                             props.threshold=addon_prefs.threshold
                            
-                            props = row.operator("tpc_ops.snapflat_modal", text="Sharp*", icon='SHADING_BBOX')                         
+                            props = row.operator("tpc_ot.snapflat_modal", text="Sharp*", icon='SHADING_BBOX')                         
                             props.mode='snap_for_sharp'
                             props.mesh_select_mode=addon_prefs.mesh_select_mode
                             props.threshold=addon_prefs.threshold
