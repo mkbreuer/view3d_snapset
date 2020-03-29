@@ -66,6 +66,8 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
         box.scale_y = addon_prefs.ui_scale_y_b1       
         box.separator() 
         box.separator() 
+        
+
 
 
         if addon_prefs.toggle_button_switch == False:
@@ -74,10 +76,9 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
             box.separator()                 
             box.separator()                 
            
-            row = box.column(align=True)
-
             if addon_prefs.tpc_use_grid_pie == True:
                 row = box.row(align=True)
+                row.alignment = 'RIGHT' 
                 row.label(text=addon_prefs.name_bta) 
                 
                 if addon_prefs.use_internal_icon_bta == True:  
@@ -89,6 +90,7 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
             if context.mode == 'OBJECT': 
                 if addon_prefs.tpc_use_place_pie == True:
                     row = box.row(align=True)
+                    row.alignment = 'RIGHT' 
                     row.label(text=addon_prefs.name_btb) 
                    
                     if addon_prefs.use_internal_icon_btb == True:   
@@ -99,6 +101,7 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
             else:
                 if addon_prefs.tpc_use_retopo_pie == True:
                     row = box.row(align=True)
+                    row.alignment = 'RIGHT' 
                     row.label(text=addon_prefs.name_btf)
 
                     if addon_prefs.use_internal_icon_btf == True:   
@@ -110,6 +113,7 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
  
             if addon_prefs.tpc_use_active_pie == True:
                 row = box.row(align=True)
+                row.alignment = 'RIGHT' 
                 row.label(text=addon_prefs.name_btd) 
 
                 if addon_prefs.use_internal_icon_btd == True:
@@ -121,6 +125,7 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
            
             if addon_prefs.tpc_use_closest_pie == True:
                 row = box.row(align=True)
+                row.alignment = 'RIGHT' 
                 row.label(text=addon_prefs.name_bte) 
 
                 if addon_prefs.use_internal_icon_bte == True:
@@ -134,6 +139,7 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
 
             if addon_prefs.tpc_use_grid_modal_pie == True:
                 row = box.row(align=True)
+                row.alignment = 'RIGHT' 
                 row.label(text="Grid*") 
                 icon_snap_grid = icons.get("icon_snap_grid")
                 row.operator("tpc_ot.snapset_modal", text="", icon_value=icon_snap_grid.icon_id).mode = "GRID"
@@ -141,12 +147,14 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
             if context.mode == 'OBJECT':
                 if addon_prefs.tpc_use_place_modal_pie == True:
                     row = box.row(align=True)
+                    row.alignment = 'RIGHT' 
                     row.label(text="Place*") 
                     icon_snap_place = icons.get("icon_snap_place")
                     row.operator("tpc_ot.snapset_modal", text="", icon_value=icon_snap_place.icon_id).mode = "PLACE"                    
             else:
                 if addon_prefs.tpc_use_retopo_modal_pie == True:              
                     row = box.row(align=True)
+                    row.alignment = 'RIGHT'     
                     row.label(text="Retopo*") 
                     icon_snap_retopo = icons.get("icon_snap_retopo")
                     row.operator("tpc_ot.snapset_modal", text="", icon_value=icon_snap_retopo.icon_id).mode = "RETOPO"   
@@ -155,10 +163,12 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
             if addon_prefs.tpc_use_custom_modal_pie == True:
                 if addon_prefs.use_internal_icon_btM == True:     
                     row = box.row(align=True)
+                    row.alignment = 'RIGHT' 
                     row.label(text=addon_prefs.name_btM) 
                     row.operator("tpc_ot.snapset_modal", text='', icon=addon_prefs.icon_btM).mode = "CUSTOM"  
                 else:       
                     row = box.row(align=True)
+                    row.alignment = 'RIGHT' 
                     row.label(text=addon_prefs.name_btM) 
                     icon_snap_custom = icons.get("icon_snap_custom")             
                     row.operator("tpc_ot.snapset_modal", text='', icon_value=icon_snap_custom.icon_id).mode = "CUSTOM"  
@@ -300,7 +310,19 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
             if alignmesh_state[0]:
   
                 row = box.row(align=True)
-                row.operator("tpc_ot.mirror_over_edge", text="Edge Mirror", icon='ARROW_LEFTRIGHT')                    
+                row.operator("tpc_ot.mirror_over_edge", text="EdgeMirror", icon='ARROW_LEFTRIGHT')                    
+
+                icon_align_vertices = icons.get("icon_align_vertices") 
+                props = row.operator('mesh.vertices_smooth', text="SVerts", icon_value=icon_align_vertices.icon_id)
+                props.factor=0.5
+                props.repeat=1
+                props.xaxis=True
+                props.yaxis=True
+                props.zaxis=True
+
+                icon_align_smooth = icons.get("icon_align_smooth") 
+                row.operator('tpc_ot.shrinkwrap_smooth', text="SFaces", icon_value=icon_align_smooth.icon_id)
+  
                                  
                 row = box.row(align=True)        
                 row.operator_context = 'EXEC_REGION_WIN'       
@@ -320,24 +342,13 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
                 row = box.row(align=True)
                 row.label(text="Mirror Orientation")     
                 row.prop(addon_prefs, 'orient', text="")     
-
-                box.separator()  
-
-        
-                row = box.row(align=True)
-
-                icon_align_vertices = icons.get("icon_align_vertices") 
-                props = row.operator('mesh.vertices_smooth', text="SVerts", icon_value=icon_align_vertices.icon_id)
-                props.factor=0.5
-                props.repeat=1
-                props.xaxis=True
-                props.yaxis=True
-                props.zaxis=True
-
-                icon_align_smooth = icons.get("icon_align_smooth") 
-                row.operator('tpc_ot.shrinkwrap_smooth', text="SFaces", icon_value=icon_align_smooth.icon_id)
-                                                   
+                
+                                                                        
                 if addon_prefs.toggle_addon_looptools == True: 
+                    
+                    box.separator()                     
+                   
+                    row = box.row(align=True)   
 
                     looptools_addon = "mesh_looptools" 
                     looptools_state = addon_utils.check(looptools_addon)
@@ -350,8 +361,10 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
                         if addon_prefs.toggle_looptools_menu_type == False:                                                            
                             row.menu("VIEW3D_MT_edit_mesh_looptools", text="LoopTools", icon_value=icon_align_looptools.icon_id)
                         else:
-                            row.popover(panel="VIEW3D_PT_tools_looptools", text="LoopTools", icon_value=icon_align_looptools.icon_id)        
-
+                            row.popover(panel="VIEW3D_PT_tools_looptools", text="LoopTools", icon_value=icon_align_looptools.icon_id)                                
+                
+                    row.label(text=" ")                          
+                    row.label(text=" ")                          
 
                 box.separator() 
 
@@ -602,7 +615,8 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
         if context.mode == 'OBJECT':
                 
             row = box.row(align=True)                       
-            row.label(text="Cursor Locate:")              
+            row.alignment = 'RIGHT' 
+            row.label(text="Cursor Locate :")              
 
             props = row.operator("tpc_ot.cursor_copy", text="", icon ='EVENT_X')
             props.copy_rot = False
@@ -647,7 +661,8 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
 
             # cursor copy
             row = box.row(align=True)                     
-            row.label(text="Cursor Rotate:")
+            row.alignment = 'RIGHT' 
+            row.label(text="Cursor Rotate :")
                 
             props = row.operator("tpc_ot.cursor_copy", text="", icon ='EVENT_X')
             props.copy_rot = False
@@ -692,7 +707,8 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
 
             # align to axis
             row = box.row(align=True)                      
-            row.label(text="World Axis:")
+            row.alignment = 'RIGHT' 
+            row.label(text="World Axis :")
 
             props = row.operator("tpc_ot.align_object_to_axis", text="", icon ='EVENT_X')
             props.use_align_axis_x=True   
@@ -723,7 +739,8 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
             box.separator()  
 
             row = box.row(align=True)
-            row.label(text="Flatten*:")
+            row.alignment = 'RIGHT' 
+            row.label(text="Flatten* :")
               
             looptools_addon = "mesh_looptools" 
             looptools_state = addon_utils.check(looptools_addon)
@@ -757,7 +774,9 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
 
 
             row = box.row(align=True)
-            row.label(text="Select*/Seam*/Sharp*:") 
+            row.alignment = 'RIGHT' 
+            row.label(text="Select*/Seam*/Sharp* :") 
+            row.label(text="", icon='BLANK1')
 
             props = row.operator("tpc_ot.snapflat_modal", text="", icon='RESTRICT_SELECT_ON')
             props.mode='snap_for_select'                          
@@ -780,14 +799,18 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
                 preference = get_preferences()                        
     
                 row = box.row(align=True)
-                row.label(text="Threshold:")     
+                row.alignment = 'RIGHT' 
+                row.label(text="Threshold :")     
+                row.label(text=" ")
                 sub = row.row(align=True)
-                sub.scale_x = 0.5   
+                sub.scale_x = 0.75   
                 sub.prop(preference, "threshold", text="")       
 
 
                 row = box.row(align=True)
-                row.label(text="Modals finish with:")     
+                row.alignment = 'RIGHT' 
+                row.label(text="Modals finish with :")     
+                row.label(text="", icon='BLANK1')
                 row.prop_enum(preference, "mesh_select_mode", "vertices", text="", icon ='VERTEXSEL')  
                 row.prop_enum(preference, "mesh_select_mode", "edges", text="", icon ='EDGESEL')
                 row.prop_enum(preference, "mesh_select_mode", "faces", text="", icon ='FACESEL')
