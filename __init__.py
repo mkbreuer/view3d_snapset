@@ -121,14 +121,15 @@ def update_snapset(self, context):
         bpy.types.VIEW3D_MT_armature_context_menu.remove(draw_snapset_item_special)  
         bpy.types.VIEW3D_MT_particle_context_menu.remove(draw_snapset_item_special)         
         bpy.types.VIEW3D_MT_editor_menus.remove(draw_snapset_item_editor) 
+        bpy.types.VIEW3D_HT_header.remove(draw_snapset_item_editor) 
         bpy.types.VIEW3D_PT_snapping.remove(draw_snapset_snapping)    
 
     except RuntimeError:
         pass
     
+
     addon_prefs = context.preferences.addons[__name__].preferences    
   
-
     # SPECIAL MENU [W] #  
     if addon_prefs.toggle_special_menu == True:  
 
@@ -148,7 +149,7 @@ def update_snapset(self, context):
             bpy.types.VIEW3D_MT_edit_mesh_context_menu.prepend(draw_snapset_item_special)  
             bpy.types.VIEW3D_MT_edit_curve_context_menu.prepend(draw_snapset_item_special)  
             bpy.types.VIEW3D_MT_armature_context_menu.prepend(draw_snapset_item_special)  
-            bpy.types.VIEW3D_MT_particle_context_menu.prepend(draw_snapset_item_special)  
+            bpy.types.VIEW3D_MT_particle_context_menu.prepend(draw_snapset_item_special)     
 
 
     # EDITOR MENUS #    
@@ -158,19 +159,23 @@ def update_snapset(self, context):
            
             # ADD TO MENUS: TOP #
             if addon_prefs.toggle_view_type == 'editor': 
-                bpy.types.VIEW3D_MT_editor_menus.prepend(draw_snapset_item_editor) 
+                bpy.types.VIEW3D_MT_editor_menus.prepend(draw_snapset_item_editor)            
+            else: 
+                bpy.types.VIEW3D_HT_header.prepend(draw_snapset_item_editor)           
 
         if addon_prefs.toggle_editor_type == 'prepend':
 
             # ADD TO MENUS: BOTTOM #
             if addon_prefs.toggle_view_type == 'editor': 
                 bpy.types.VIEW3D_MT_editor_menus.append(draw_snapset_item_editor) 
+            else: 
+                bpy.types.VIEW3D_HT_header.append(draw_snapset_item_editor)
+
 
     # SNAPPING SETTING #  
     if addon_prefs.toggle_snapping_menu == True:
         bpy.types.VIEW3D_PT_snapping.prepend(draw_snapset_snapping)
-
-
+   
 
 # UPDATE TOOLS # not needed if we used bool properties #
 def update_snapset_tools(self, context):
@@ -188,7 +193,7 @@ def update_snapset_tools(self, context):
 
 
 # ADDON PREFERENCES PANEL #
-#@addon_updater_ops.make_annotations
+@addon_updater_ops.make_annotations
 class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
     bl_idname = __name__
     
@@ -336,7 +341,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
         name = '3D View Type',
         description = 'different layout types',
         items=(('editor',  'Editor',  'add functions to editor menus'),
-               ('header',  'Header',  'add functions to header menus')),
+               ('header',  'Header Example',  'add functions to header menus')),
         default='editor') 
 
     toggle_editor_type : EnumProperty(
@@ -3068,9 +3073,9 @@ classes = (
     VIEW3D_OT_snap_element,
     VIEW3D_OT_snap_use,
     VIEW3D_MT_snapset_menu,
-    VIEW3D_MT_snapset_menu_panel,
     VIEW3D_MT_snapset_menu_pie_1,
     VIEW3D_MT_snapset_menu_pie_2,
+    VIEW3D_MT_snapset_menu_panel,
     VIEW3D_PT_snapset_panel_ui,
     VIEW3D_MT_snapset_menu_pencil,
     VIEW3D_MT_snapset_menu_editor,
@@ -3084,7 +3089,7 @@ classes = (
     VIEW3D_OT_3d_cursor_copy,
     VIEW3D_OT_place_cursor,
     VIEW3D_OT_place_cursor_modal,
-    VIEW3D_OT_keymap_snapset,
+    VIEW3D_OT_keymap_snapset,        
     Addon_Preferences_Snapset,
     Global_Property_Group,
 )
@@ -3094,9 +3099,9 @@ addon_keymaps = []
 def register():
     # addon updater code and configurations
     addon_updater_ops.register(bl_info)
-   
+ 
     for cls in classes:
-        #addon_updater_ops.make_annotations(cls)
+        addon_updater_ops.make_annotations(cls)
         bpy.utils.register_class(cls)
 
     bpy.types.WindowManager.snap_global_props = bpy.props.PointerProperty(type=Global_Property_Group)   
@@ -3105,7 +3110,7 @@ def register():
     kc = wm.keyconfigs.addon
     if kc:   
 
-        addon_prefs = context.preferences.addons[__name__].preferences
+        addon_prefs = bpy.context.preferences.addons[__name__].preferences
         if addon_prefs.toggle_snapset_add_tools == True:
 
             #km = kc.keymaps.new(name='Object Mode', space_type='EMPTY')
@@ -3117,8 +3122,7 @@ def register():
                                        shift=addon_prefs.hotkey_button_m_shift)
             kmi.properties.mode = "CUSTOM"                             
             addon_keymaps.append((km,kmi))
-            
-
+        
     update_snapset(None, bpy.context)
     update_snapset_menu(None, bpy.context)
     update_snapset_tools(None, bpy.context)

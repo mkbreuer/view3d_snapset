@@ -392,24 +392,3 @@ class VIEW3D_OT_place_cursor_modal(bpy.types.Operator):
 
 
 
-# REGISTER #
-classes = (
-    VIEW3D_OT_3d_cursor_copy,
-    VIEW3D_OT_place_cursor,
-    VIEW3D_OT_place_cursor_modal,
-)
-
-def register():
-    for cls in classes:
-        bpy.utils.register_class(cls)
-
-def unregister():
-    for cls in reversed(classes):
-        bpy.utils.unregister_class(cls)
-
-
-if __name__ == "__main__":
-    register()
-
-
-

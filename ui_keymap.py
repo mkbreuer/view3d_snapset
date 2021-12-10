@@ -11,20 +11,22 @@ from view3d_snapset.ui_menu_pie_2   import (VIEW3D_MT_snapset_menu_pie_2)
 # KEY REGISTRY # 
 addon_keymaps = []
 def update_snapset_menu(self, context):
-    try:
-        bpy.utils.unregister_class(VIEW3D_MT_snapset_menu)
-        bpy.utils.unregister_class(VIEW3D_MT_snapset_menu_pie_1)        
-        bpy.utils.unregister_class(VIEW3D_MT_snapset_menu_pie_2)
+    
+    # commented: registered as sub-classes
+    # try:
+    #     bpy.utils.unregister_class(VIEW3D_MT_snapset_menu)
+    #     bpy.utils.unregister_class(VIEW3D_MT_snapset_menu_pie_1)        
+    #     bpy.utils.unregister_class(VIEW3D_MT_snapset_menu_pie_2)
 
-        # Keymapping
-        # remove keymaps when add-on is deactivated
-        for km, kmi in addon_keymaps:
-            km.keymap_items.remove(kmi)
-        # clear the list
-        addon_keymaps.clear()
+    #     # Keymapping
+    #     # remove keymaps when add-on is deactivated
+    #     for km, kmi in addon_keymaps:
+    #         km.keymap_items.remove(kmi)
+    #     # clear the list
+    #     addon_keymaps.clear()
             
-    except:
-        pass
+    # except:
+    #     pass
     
     wm = bpy.context.window_manager
     kc = wm.keyconfigs.addon
@@ -36,7 +38,7 @@ def update_snapset_menu(self, context):
            
             if addon_prefs.toggle_keymap_type == 'menu':
 
-                bpy.utils.register_class(VIEW3D_MT_snapset_menu)
+               #bpy.utils.register_class(VIEW3D_MT_snapset_menu)
 
                 km = kc.keymaps.new(name='3D View', space_type='VIEW_3D')
                 #kmi = km.keymap_items.new('wm.call_menu', 'W', 'PRESS', shift=True) #, ctrl=True, alt=True)
@@ -49,10 +51,10 @@ def update_snapset_menu(self, context):
           
             if addon_prefs.toggle_keymap_type == 'pie':
 
-                if addon_prefs.toggle_pie_layout == False: 
-                    bpy.utils.register_class(VIEW3D_MT_snapset_menu_pie_1)
-                else:
-                    bpy.utils.register_class(VIEW3D_MT_snapset_menu_pie_2)
+                #if addon_prefs.toggle_pie_layout == False: 
+                    #bpy.utils.register_class(VIEW3D_MT_snapset_menu_pie_1)
+               # else:
+                    #bpy.utils.register_class(VIEW3D_MT_snapset_menu_pie_2)
 
                 km = kc.keymaps.new(name='3D View', space_type='VIEW_3D')
                 #kmi = km.keymap_items.new('wm.call_menu_pie', 'W', 'PRESS', shift=True) #, ctrl=True, alt=True)                

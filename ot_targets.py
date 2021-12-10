@@ -267,25 +267,3 @@ class VIEW3D_OT_snap_use(bpy.types.Operator):
         return {'FINISHED'}
     
 
-
-# REGISTER #
-classes = (
-    VIEW3D_OT_pivot_target,
-    VIEW3D_OT_orient_axis,
-    VIEW3D_OT_set_orientation,
-    VIEW3D_OT_snap_target,
-    VIEW3D_OT_snap_element,
-    VIEW3D_OT_snap_use,
-    )
-
-def register():
-    for cls in classes:
-        bpy.utils.register_class(cls)
-
-def unregister():
-    for cls in reversed(classes):
-        bpy.utils.unregister_class(cls)
-
-if __name__ == "__main__":
-    register()    
-    
