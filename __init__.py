@@ -1,6 +1,6 @@
 # ##### BEGIN GPL LICENSE BLOCK #####
 #
-# (C) 2019 MKB
+# (C) 2021 MKB
 #
 #  This program is free software; you can redistribute it and / or
 #  modify it under the terms of the GNU General Public License
@@ -23,7 +23,7 @@
 bl_info = {
     "name": "SnapSet",
     "author": "marvin.k.breuer (MKB)",
-    "version": (0, 3, 2),
+    "version": (0, 3, 3),
     "blender": (2, 81, 0),
     "location": "3D View > Sidebar [N], Menu [SHIFT+W], Special Menu [W], Shortcut [F], in Header and Snap Settings",
     "description": "full customizable buttons for snapping task",
@@ -71,9 +71,6 @@ from .ui_menu_pie_2 import *
 from .ui_panel      import *
 from .ui_snapping   import *
 from .ui_utils      import *
-
-# updater ops import, all setup in this file
-from . import addon_updater_ops
 
 
 importlib.reload(developer_utils)
@@ -191,6 +188,7 @@ def update_snapset_tools(self, context):
 
 
 # ADDON PREFERENCES PANEL #
+#@addon_updater_ops.make_annotations
 class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
     bl_idname = __name__
     
@@ -3094,10 +3092,11 @@ classes = (
 addon_keymaps = []
 
 def register():
-
+    # addon updater code and configurations
     addon_updater_ops.register(bl_info)
    
     for cls in classes:
+        #addon_updater_ops.make_annotations(cls)
         bpy.utils.register_class(cls)
 
     bpy.types.WindowManager.snap_global_props = bpy.props.PointerProperty(type=Global_Property_Group)   
@@ -3128,6 +3127,9 @@ def register():
 
 
 def unregister():
+    # addon updater code and configurations
+    addon_updater_ops.unregister()
+
     try:
         del bpy.types.WindowManager.snap_global_props
     except Exception as e:
