@@ -10,7 +10,7 @@
 
 Release Download https://github.com/mkbreuer/view3d_snapset/releases
                                
-## Durable Tools 
+### Durable Tools 
 > After execute the snap settings toggle to the needed durable preferences.                       
                       
 - Grid        > snap pivot with absolute grid alignment               
@@ -23,7 +23,7 @@ Release Download https://github.com/mkbreuer/view3d_snapset/releases
 - Perpendic   > snap selected onto target 
 - PlaceCursor > place 3D cursor onto a surface target  
 
-## (*) Modal Tools  
+### (*) Modal Tools  
 > After execute the snap settings toggle to the needed modal preferences.  
 > It finish the modal directly after an click and the settings switch back to the previous durable one.                          
 
@@ -36,26 +36,26 @@ Release Download https://github.com/mkbreuer/view3d_snapset/releases
 - Custom*         > customizable extra button
 
 
-## Panel layout
+### Panel layout
 ![panel layout durable: ](./images/panel_layout.png)
 ![panel layout modals: ](./images/panel_layout2.png)
 
-## Append to header snap settings
+### Append to header snap settings
 ![header settings layout: ](./images/append_functions_to_snap_settings.png)
 ![header settings layout: ](./images/append_functions_preferences.png)
                                        
-## Append to context menu, key [W]
+### Append to context menu, key [W]
 ![special context menu layout: ](./images/menu_context_special.png)    
 
-## Custom context menu, key [customizable]
+### Custom context menu, key [customizable]
 ![custom context menu layout: ](./images/menu_context.png)  
 
-## Custom pie menu, key [customizable]
+### Custom pie menu, key [customizable]
 ![custom pie menu layout: ](./images/pie_menu_layouts.png) 
 
-## Auxiliary addons for the pie menu
+### Auxiliary addons for the pie menu
 ![addons for pie menu: ](./images/pie_menu_auxiliary_addons.png)  
 
-## Align Mesh Addon
+### Align Mesh Addon
 - comes not with blender by default and must be installed separatly!
 - release download: https://github.com/mkbreuer/view3d_alignmesh/releases
