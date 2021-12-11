@@ -1,6 +1,7 @@
 # SnapSet - Blender Addon
 
-Batch presets for snapping task
+> Batch presets for snapping task
+
 - as durable buttons or as one time modal buttons 
 - all buttons are full customizable
 - different layouts for context menus and pie menu with custom shortcut key creation
@@ -9,7 +10,7 @@ Batch presets for snapping task
 
 Release Download https://github.com/mkbreuer/view3d_snapset/releases
                                
-Durable Tools 
+## Durable Tools 
 > After execute the snap settings toggle to the needed durable preferences.                       
                       
 - Grid        > snap pivot with absolute grid alignment               
@@ -22,7 +23,7 @@ Durable Tools
 - Perpendic   > snap selected onto target 
 - PlaceCursor > place 3D cursor onto a surface target  
 
- (*) Modal Tools  
+## (*) Modal Tools  
 > After execute the snap settings toggle to the needed modal preferences.  
 > It finish the modal directly after an click and the settings switch back to the previous durable one.                          
 
