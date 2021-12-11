@@ -239,7 +239,7 @@ def draw_snapset_snapping(self, context):
        
         row = layout.row(align=True)
         row.label(text="SnapSet")
-        row.operator("preferences.addon_show", text='', icon="LAYER_USED", emboss=False).module="view3d_snapset" 
+        row.operator("preferences.addon_show", text='', icon="LAYER_USED").module="view3d_snapset" 
         draw_snapset_snapping_layout(self, context)
 
     else:

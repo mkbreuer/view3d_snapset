@@ -36,10 +36,12 @@ Custom*         > customizable extra button
 
 
 ## Panel layout
-![panel layout: ](./images/panel_layout.png)
+![panel layout durable: ](./images/panel_layout.png)
+![panel layout modals: ](./images/panel_layout2.png)
 
 ## Append to header snap settings
 ![header settings layout: ](./images/append_functions_to_snap_settings.png)
+![header settings layout: ](./images/append_functions_preferences.png)
                                        
 ## Append to context menu, key [W]
 ![special context menu layout: ](./images/menu_context_special.png)    
