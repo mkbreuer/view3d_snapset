@@ -9,7 +9,9 @@
 - with auxiliary addons for the pie menu: align objects (objectmode), looptools and align mesh (editmode)
 
 Release Download https://github.com/mkbreuer/view3d_snapset/releases
-                               
+
+##
+
 ### Durable Tools 
 > After execute the snap settings toggle to the needed durable preferences.                       
                       
@@ -35,6 +37,7 @@ Release Download https://github.com/mkbreuer/view3d_snapset/releases
 - PlaceCursor*    > snap 3d cursor onto surface target til release 
 - Custom*         > customizable extra button
 
+##
 
 ### Panel layout
 ![panel layout durable: ](./images/panel_layout.png)
