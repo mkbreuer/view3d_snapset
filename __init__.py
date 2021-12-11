@@ -23,7 +23,7 @@
 bl_info = {
     "name": "SnapSet",
     "author": "marvin.k.breuer (MKB)",
-    "version": (0, 3, 3),
+    "version": (0, 3, 4),
     "blender": (2, 81, 0),
     "location": "3D View > different location: Sidebar [N], Default Menu [SHIFT+W], Special Menu [W], Shortcut [F], in Header Snap Settings, etc.",
     "description": "Full customizable preset buttons for snapping task",
