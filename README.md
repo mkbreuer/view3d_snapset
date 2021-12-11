@@ -10,7 +10,7 @@ Batch presets for snapping task
 Release Download https://github.com/mkbreuer/view3d_snapset/releases
                                
 Durable Tools 
-- After execute the snap settings toggle to the needed durable preferences.                       
+> After execute the snap settings toggle to the needed durable preferences.                       
                       
 - Grid        > snap pivot with absolute grid alignment               
 - Place       > snap pivot to surface of other objects  
@@ -23,8 +23,8 @@ Durable Tools
 - PlaceCursor > place 3D cursor onto a surface target  
 
  (*) Modal Tools  
-- After execute the snap settings toggle to the needed modal preferences.  
-- It finish the modal directly after an click and the settings switch back to the previous durable one.                          
+> After execute the snap settings toggle to the needed modal preferences.  
+> It finish the modal directly after an click and the settings switch back to the previous durable one.                          
 
 - Grid*           > snap pivot with absolute grid alignment til release             
 - Place*          > object mode: snap pivot to surface of other objects til release  
