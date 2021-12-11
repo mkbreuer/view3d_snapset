@@ -35,11 +35,8 @@ PlaceCursor*    > snap 3d cursor onto surface target til release
 Custom*         > customizable extra button
 
 
-## Panel layout
-![panel layout: ](./images/panel_layout.png) > layout changeable
-
-## Append to header snap settings
-![header settings layout: ](./images/append_functions_to_snap_settings.png)
+## Panel layout and append to header snap settings
+![panel layout: ](./images/panel_layout.png) ....... ![header settings layout: ](./images/append_functions_to_snap_settings.png)
                                        
 ## Append to context menu and custom context menu key 
 ![special context menu layout: ](./images/menu_context_special.png) ....... ![custom context menu layout: ](./images/menu_context.png)  
