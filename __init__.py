@@ -1267,7 +1267,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                     row.alignment = 'LEFT'
                     row.prop(self, "tpc_use_place_special", text='')                   
                     row.label(text="Place", icon_value=icon_snap_place.icon_id)             
-                    row.label(text="> snap pivot to surface of other objects")   
+                    row.label(text="> objectmode: snap object to surface of other objects")   
                 
                     box.separator()            
                    
@@ -1299,7 +1299,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                     row.alignment = 'LEFT'
                     row.prop(self, "tpc_use_retopo_special", text='')                        
                     row.label(text="Retopo", icon_value=icon_snap_retopo.icon_id) 
-                    row.label(text="> snap selected onto target in editmode")   
+                    row.label(text="> editmode: snap selected onto target surface")   
                   
                     box.separator() 
                    
@@ -1323,7 +1323,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                     row.alignment = 'LEFT'
                     row.prop(self, "tpc_use_pcursor_special", text='')           
                     row.label(text="PlaceCursor", icon_value=icon_snap_pcursor.icon_id) 
-                    row.label(text="> place 3D cursor onto a surface target")   
+                    row.label(text="> place 3D cursor onto a target surface")   
 
                     if self.toggle_special_type_layout in ['column', 'switch']:
 
@@ -1351,7 +1351,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                     row.alignment = 'LEFT'
                     row.prop(self, "tpc_use_grid_modal_special", text='')                          
                     row.label(text="Grid*", icon_value=icon_snap_grid.icon_id)
-                    row.label(text="> snap pivot with absolute grid alignment til release")              
+                    row.label(text="> snap pivot with absolute grid alignment till release")              
 
                     box.separator() 
                   
@@ -1359,7 +1359,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                     row.alignment = 'LEFT'
                     row.prop(self, "tpc_use_place_modal_special", text='')                          
                     row.label(text="Place*", icon_value=icon_snap_place.icon_id)             
-                    row.label(text="> object mode: snap pivot to surface of other objects til release")   
+                    row.label(text="> objectmode: snap object to surface of other objects till release")   
 
                     box.separator()           
              
@@ -1367,7 +1367,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                     row.alignment = 'LEFT'
                     row.prop(self, "tpc_use_retopo_modal_special", text='')                      
                     row.label(text="Retopo*", icon_value=icon_snap_retopo.icon_id) 
-                    row.label(text="> edit mode: snap selected onto target til release")  
+                    row.label(text="> editmode: snap selected onto target surface till release")  
 
                     box.separator()           
                    
@@ -1375,7 +1375,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                     row.alignment = 'LEFT'
                     row.prop(self, "tpc_use_center_modal_special", text='')  
                     row.label(text="MidPoint*", icon_value=icon_snap_center.icon_id) 
-                    row.label(text="> snap selected onto target til release")  
+                    row.label(text="> snap selected onto target till release")  
 
                     box.separator()           
                    
@@ -1383,7 +1383,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                     row.alignment = 'LEFT'
                     row.prop(self, "tpc_use_perpendic_modal_special", text='')                        
                     row.label(text="Perpendic*", icon_value=icon_snap_perpendic.icon_id) 
-                    row.label(text="> snap selected onto target til release")  
+                    row.label(text="> snap selected onto target till release")  
 
                     box.separator()           
                    
@@ -1391,7 +1391,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                     row.alignment = 'LEFT'
                     row.prop(self, "tpc_use_pcursor_modal_special", text='')                        
                     row.label(text="PlaceCursor*", icon_value=icon_snap_pcursor.icon_id) 
-                    row.label(text="> snap 3d cursor onto surface target til release")  
+                    row.label(text="> snap 3d cursor onto target surface till release")  
 
                     box.separator() 
                    
@@ -1399,7 +1399,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                     row.alignment = 'LEFT'
                     row.prop(self, "tpc_use_custom_modal_special", text='')                      
                     row.label(text="Custom*", icon_value=icon_snap_custom.icon_id) 
-                    row.label(text="> snap selected onto target til release")  
+                    row.label(text="> snap selected onto target till release")  
                                        
                     if self.toggle_special_type_layout in ['column', 'switch']:
 
@@ -1528,7 +1528,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                         row.alignment = 'LEFT'
                         row.prop(self, "tpc_use_place_pie", text='')                   
                         row.label(text="Place", icon_value=icon_snap_place.icon_id)             
-                        row.label(text="> snap pivot to surface of other objects")   
+                        row.label(text="> objectmode: snap object to surface of other objects")   
                     
                         box.separator()            
                        
@@ -1560,7 +1560,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                         row.alignment = 'LEFT'
                         row.prop(self, "tpc_use_retopo_pie", text='')                        
                         row.label(text="Retopo", icon_value=icon_snap_retopo.icon_id) 
-                        row.label(text="> snap selected onto target in editmode")   
+                        row.label(text="> editmode: snap selected onto target surface")   
                       
                         box.separator() 
                        
@@ -1584,7 +1584,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                         row.alignment = 'LEFT'
                         row.prop(self, "tpc_use_pcursor_pie", text='')           
                         row.label(text="PlaceCursor", icon_value=icon_snap_pcursor.icon_id) 
-                        row.label(text="> snap 3d cursor onto surface target")   
+                        row.label(text="> snap 3d cursor onto target surface")   
 
                         box.separator() 
                         box = layout.box().column(align=True)
@@ -1601,7 +1601,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                         row.alignment = 'LEFT'
                         row.prop(self, "tpc_use_grid_modal_pie", text='')                          
                         row.label(text="Grid*", icon_value=icon_snap_grid.icon_id)
-                        row.label(text="> snap pivot with absolute grid alignment til release")              
+                        row.label(text="> snap pivot with absolute grid alignment till release")              
 
                         box.separator() 
                       
@@ -1609,7 +1609,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                         row.alignment = 'LEFT'
                         row.prop(self, "tpc_use_place_modal_pie", text='')                          
                         row.label(text="Place*", icon_value=icon_snap_place.icon_id)             
-                        row.label(text="> object mode: snap pivot to surface of other objects til release")   
+                        row.label(text="> objectmode: snap object to surface of other objects till release")   
 
                         box.separator()           
                  
@@ -1617,7 +1617,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                         row.alignment = 'LEFT'
                         row.prop(self, "tpc_use_retopo_modal_pie", text='')                      
                         row.label(text="Retopo*", icon_value=icon_snap_retopo.icon_id) 
-                        row.label(text="> edit mode: snap selected onto target til release")  
+                        row.label(text="> editmode: snap selected onto target surface till release")  
 
                         box.separator()           
                        
@@ -1625,7 +1625,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                         row.alignment = 'LEFT'
                         row.prop(self, "tpc_use_center_modal_pie", text='')  
                         row.label(text="MidPoint*", icon_value=icon_snap_center.icon_id) 
-                        row.label(text="> snap selected onto target til release")  
+                        row.label(text="> snap selected onto target till release")  
 
                         box.separator()           
                        
@@ -1633,7 +1633,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                         row.alignment = 'LEFT'
                         row.prop(self, "tpc_use_perpendic_modal_pie", text='')                        
                         row.label(text="Perpendic*", icon_value=icon_snap_perpendic.icon_id) 
-                        row.label(text="> snap selected onto target til release")  
+                        row.label(text="> snap selected onto target till release")  
 
                         box.separator() 
                        
@@ -1641,7 +1641,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                         row.alignment = 'LEFT'
                         row.prop(self, "tpc_use_pcursor_pie", text='')           
                         row.label(text="PlaceCursor*", icon_value=icon_snap_pcursor.icon_id) 
-                        row.label(text="> place 3d cursor onto a surface target")   
+                        row.label(text="> place 3d cursor onto a target surface")   
                        
                         box.separator() 
                        
@@ -1649,7 +1649,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                         row.alignment = 'LEFT'
                         row.prop(self, "tpc_use_custom_modal_pie", text='')                      
                         row.label(text="Custom*", icon_value=icon_snap_custom.icon_id) 
-                        row.label(text="> snap selected onto target til release")  
+                        row.label(text="> snap selected onto target till release")  
 
                         box.separator() 
 
@@ -1926,7 +1926,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                         row.alignment = 'LEFT'
                         row.prop(self, "tpc_use_place_editor", text='')                   
                         row.label(text="Place", icon_value=icon_snap_place.icon_id)             
-                        row.label(text="> snap pivot to surface of other objects")   
+                        row.label(text="> objectmode: snap object to surface of other objects")   
                     
                         box.separator()            
                        
@@ -1958,7 +1958,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                         row.alignment = 'LEFT'
                         row.prop(self, "tpc_use_retopo_editor", text='')                        
                         row.label(text="Retopo", icon_value=icon_snap_retopo.icon_id) 
-                        row.label(text="> snap selected onto target in editmode")   
+                        row.label(text="> editmode: snap selected onto target surface")   
                       
                         box.separator() 
                        
@@ -2000,7 +2000,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                         row.alignment = 'LEFT'
                         row.prop(self, "tpc_use_grid_modal_editor", text='')                          
                         row.label(text="Grid*", icon_value=icon_snap_grid.icon_id)
-                        row.label(text="> snap pivot with absolute grid alignment til release")              
+                        row.label(text="> snap pivot with absolute grid alignment till release")              
 
                         box.separator() 
                       
@@ -2008,7 +2008,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                         row.alignment = 'LEFT'
                         row.prop(self, "tpc_use_place_modal_editor", text='')                          
                         row.label(text="Place*", icon_value=icon_snap_place.icon_id)             
-                        row.label(text="> object mode: snap pivot to surface of other objects til release")   
+                        row.label(text="> objectmode: snap object to surface of other objects till release")   
 
                         box.separator()           
                  
@@ -2016,7 +2016,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                         row.alignment = 'LEFT'
                         row.prop(self, "tpc_use_retopo_modal_editor", text='')                      
                         row.label(text="Retopo*", icon_value=icon_snap_retopo.icon_id) 
-                        row.label(text="> edit mode: snap selected onto target in til release")  
+                        row.label(text="> editmode: snap selected onto target surface till release")  
 
                         box.separator()           
                        
@@ -2024,7 +2024,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                         row.alignment = 'LEFT'
                         row.prop(self, "tpc_use_center_modal_editor", text='')  
                         row.label(text="MidPoint*", icon_value=icon_snap_center.icon_id) 
-                        row.label(text="> snap selected onto target til release")  
+                        row.label(text="> snap selected onto target till release")  
 
                         box.separator()           
                        
@@ -2032,7 +2032,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                         row.alignment = 'LEFT'
                         row.prop(self, "tpc_use_perpendic_modal_editor", text='')                        
                         row.label(text="Perpendic*", icon_value=icon_snap_perpendic.icon_id) 
-                        row.label(text="> snap selected onto target til release")  
+                        row.label(text="> snap selected onto target till release")  
 
                         box.separator() 
                        
@@ -2040,7 +2040,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                         row.alignment = 'LEFT'
                         row.prop(self, "tpc_use_custom_modal_editor", text='')                      
                         row.label(text="Custom*", icon_value=icon_snap_custom.icon_id) 
-                        row.label(text="> snap selected onto target til release")  
+                        row.label(text="> snap selected onto target till release")  
 
                         box.separator() 
 
@@ -2123,7 +2123,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                     row.alignment = 'LEFT'
                     row.prop(self, "tpc_use_place_snapping", text='')                   
                     row.label(text="Place", icon_value=icon_snap_place.icon_id)             
-                    row.label(text="> snap pivot to surface of other objects")   
+                    row.label(text="> objectmode: snap object to surface of other objectss")   
                 
                     box.separator()            
                    
@@ -2155,7 +2155,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                     row.alignment = 'LEFT'
                     row.prop(self, "tpc_use_retopo_snapping", text='')                        
                     row.label(text="Retopo", icon_value=icon_snap_retopo.icon_id) 
-                    row.label(text="> snap selected onto target in editmode")   
+                    row.label(text="> editmode: snap selected onto target surface")   
                   
                     box.separator() 
                    
@@ -2200,7 +2200,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                     row.alignment = 'LEFT'
                     row.prop(self, "tpc_use_grid_modal_snapping", text='')                          
                     row.label(text="Grid*", icon_value=icon_snap_grid.icon_id)
-                    row.label(text="> snap pivot with absolute grid alignment til release")              
+                    row.label(text="> snap pivot with absolute grid alignment till release")              
 
                     box.separator() 
                   
@@ -2208,7 +2208,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                     row.alignment = 'LEFT'
                     row.prop(self, "tpc_use_place_modal_snapping", text='')                          
                     row.label(text="Place*", icon_value=icon_snap_place.icon_id)             
-                    row.label(text="> object mode: snap pivot to surface of other objects til release")   
+                    row.label(text="> objectmode: snap object to surface of other objects till release")   
 
                     box.separator()           
              
@@ -2216,7 +2216,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                     row.alignment = 'LEFT'
                     row.prop(self, "tpc_use_retopo_modal_snapping", text='')                      
                     row.label(text="Retopo*", icon_value=icon_snap_retopo.icon_id) 
-                    row.label(text="> edit mode: snap selected onto target til release")  
+                    row.label(text="> editmode: snap selected onto target surface till release")  
 
                     box.separator()           
                    
@@ -2224,7 +2224,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                     row.alignment = 'LEFT'
                     row.prop(self, "tpc_use_center_modal_snapping", text='')  
                     row.label(text="MidPoint*", icon_value=icon_snap_center.icon_id) 
-                    row.label(text="> snap selected onto target til release")  
+                    row.label(text="> snap selected onto target till release")  
 
                     box.separator()           
                    
@@ -2232,7 +2232,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                     row.alignment = 'LEFT'
                     row.prop(self, "tpc_use_perpendic_modal_snapping", text='')                        
                     row.label(text="Perpendic*", icon_value=icon_snap_perpendic.icon_id) 
-                    row.label(text="> snap selected onto target til release")  
+                    row.label(text="> snap selected onto target till release")  
 
                     box.separator() 
                    
@@ -2240,7 +2240,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                     row.alignment = 'LEFT'
                     row.prop(self, "tpc_use_custom_modal_snapping", text='')                      
                     row.label(text="Custom*", icon_value=icon_snap_custom.icon_id) 
-                    row.label(text="> snap selected onto target til release")  
+                    row.label(text="> snap selected onto target till release")  
 
                     box.separator() 
 

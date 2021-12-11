@@ -16,25 +16,25 @@ Release Download https://github.com/mkbreuer/view3d_snapset/releases
 > After execute the snap settings toggle to the needed durable preferences.                       
                       
 - Grid        > snap pivot with absolute grid alignment               
-- Place       > snap pivot to surface of other objects  
+- Place       > objectmode: snap object to surface of other objects
+- Retopo      > editmode: snap selected onto target surface    
 - Cursor      > set 3d cursor to active or selected  
 - Closest     > snap closest point onto target  
 - Active      > snap active pivot onto target  
-- Retopo      > snap selected onto target in editmode  
 - MidPoint    > snap selected onto target 
 - Perpendic   > snap selected onto target 
-- PlaceCursor > place 3D cursor onto a surface target  
+- PlaceCursor > place 3D cursor onto a target surface 
 
 ### (*) Modal Tools  
 > After execute the snap settings toggle to the needed modal preferences.  
 > It finish the modal directly after an click and the settings switch back to the previous durable one.                          
 
-- Grid*           > snap pivot with absolute grid alignment til release             
-- Place*          > object mode: snap pivot to surface of other objects til release  
-- Retopo*         > edit mode: snap selected onto target til release 
-- MidPoint*       > snap selected onto target til release 
-- Perpendic*      > snap selected onto target til release 
-- PlaceCursor*    > snap 3d cursor onto surface target til release 
+- Grid*           > snap pivot with absolute grid alignment till release             
+- Place*          > object mode: snap object to surface of other objects till release  
+- Retopo*         > edit mode: snap selected onto target surface till release 
+- MidPoint*       > snap selected onto target till release 
+- Perpendic*      > snap selected onto target till release 
+- PlaceCursor*    > snap 3d cursor onto target surface till release 
 - Custom*         > customizable extra button
 
 ##
