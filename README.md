@@ -42,7 +42,7 @@ Custom*         > customizable extra button
 ![header settings layout: ](./images/append_functions_to_snap_settings.png)
                                        
 ## Append to context menu and custom context menu key 
-![special context menu layout: ](./images/menu_context_special.png)  ![custom context menu layout: ](./images/menu_context.png)  
+![special context menu layout: ](./images/menu_context_special.png)      ![custom context menu layout: ](./images/menu_context.png)  
 
 ## Custom pie menu
 ![custom pie menu layout: ](./images/pie_menu_layouts.png) 
