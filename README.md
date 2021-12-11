@@ -36,18 +36,15 @@ Custom*         > customizable extra button
 
 
 ## Panel layout
-![panel layout: ](./images/panel_layout.png)  
+![panel layout: ](./images/panel_layout.png) > layout changeable
 
 ## Append to header snap settings
 ![header settings layout: ](./images/append_functions_to_snap_settings.png)
                                        
-## Append to context menu, key [W]
-![special context menu layout: ](./images/menu_context_special.png)    
+## Append to context menu and custom context menu key 
+![special context menu layout: ](./images/menu_context_special.png)  ![custom context menu layout: ](./images/menu_context.png)  
 
-## Custom context menu, key [customizable]
-![custom context menu layout: ](./images/menu_context.png)  
-
-## Custom pie menu, key [customizable]
+## Custom pie menu
 ![custom pie menu layout: ](./images/pie_menu_layouts.png) 
 
 ## Auxiliary addons for the pie menu
@@ -55,4 +52,4 @@ Custom*         > customizable extra button
 
 ## Align Mesh Addon
 - comes not with blender by default and must be installed separatly!
-- Release download: https://github.com/mkbreuer/view3d_alignmesh/releases
+- release download: https://github.com/mkbreuer/view3d_alignmesh/releases
