@@ -1795,7 +1795,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                             row.prop(self, 'toggle_alignmesh_compact')                    
                         
                         row.operator("preferences.addon_show", text="", icon="FRAME_NEXT").module="view3d_alignmesh"                                                          
-                        row.operator('wm.url_open', text = '', icon = 'PLUGIN').url = "https://github.com/mkbreuer/ToolPlus"
+                        row.operator('wm.url_open', text = '', icon = 'PLUGIN').url = "https://github.com/mkbreuer/view3d_alignmesh/release"
                         box.separator() 
                   
 
