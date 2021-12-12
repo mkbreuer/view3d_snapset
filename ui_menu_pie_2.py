@@ -605,6 +605,37 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
         box.separator()    
         box.separator()    
 
+        button_align_x   = icons.get("icon_align_x") 
+        button_align_y   = icons.get("icon_align_y") 
+        button_align_z   = icons.get("icon_align_z") 
+        button_align_xyz = icons.get("icon_align_xyz") 
+
+        button_rota_x   = icons.get("icon_rota_x") 
+        button_rota_y   = icons.get("icon_rota_y") 
+        button_rota_z   = icons.get("icon_rota_z") 
+        button_rota_xyz = icons.get("icon_rota_xyz") 
+
+        button_scale_x   = icons.get("icon_scale_x") 
+        button_scale_y   = icons.get("icon_scale_y") 
+        button_scale_z   = icons.get("icon_scale_z") 
+        button_scale_xyz = icons.get("icon_scale_xyz") 
+
+        button_world_x   = icons.get("icon_world_x") 
+        button_world_y   = icons.get("icon_world_y") 
+        button_world_z   = icons.get("icon_world_z") 
+        button_world_xyz = icons.get("icon_world_xyz") 
+
+        button_cursor_loca_x   = icons.get("icon_cursor_loca_x") 
+        button_cursor_loca_y   = icons.get("icon_cursor_loca_y") 
+        button_cursor_loca_z   = icons.get("icon_cursor_loca_z") 
+        button_cursor_loca_xyz = icons.get("icon_cursor_loca_xyz") 
+
+        button_cursor_rota_x   = icons.get("icon_cursor_rota_x") 
+        button_cursor_rota_y   = icons.get("icon_cursor_rota_y") 
+        button_cursor_rota_z   = icons.get("icon_cursor_rota_z") 
+        button_cursor_rota_xyz = icons.get("icon_cursor_rota_xyz") 
+
+
         if addon_prefs.toggle_button_switch == False:           
             box.separator()                 
             box.separator()    
@@ -613,12 +644,39 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
             box.separator()   
       
         if context.mode == 'OBJECT':
-                
+           
+            # align selcted to global world axis
+            row = box.row(align=True)                      
+            row.alignment = 'RIGHT' 
+            row.label(text="World Axis :")
+
+            props = row.operator("tpc_ot.align_object_to_axis",text="", icon_value=button_world_x.icon_id)
+            props.use_align_axis_x=True   
+            props.use_align_axis_y=False   
+            props.use_align_axis_z=False     
+
+            props = row.operator("tpc_ot.align_object_to_axis",text="", icon_value=button_world_y.icon_id)
+            props.use_align_axis_x=False   
+            props.use_align_axis_y=True   
+            props.use_align_axis_z=False    
+
+            props = row.operator("tpc_ot.align_object_to_axis",text="", icon_value=button_world_z.icon_id)
+            props.use_align_axis_x=False   
+            props.use_align_axis_y=False   
+            props.use_align_axis_z=True     
+
+            props = row.operator("tpc_ot.align_object_to_axis",text="", icon_value=button_world_xyz.icon_id)
+            props.use_align_axis_x=True   
+            props.use_align_axis_y=True   
+            props.use_align_axis_z=True              
+
+
+            # align to cursor location
             row = box.row(align=True)                       
             row.alignment = 'RIGHT' 
-            row.label(text="Cursor Locate :")              
+            row.label(text="Cursor Location :")              
 
-            props = row.operator("tpc_ot.cursor_copy", text="", icon ='EVENT_X')
+            props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_loca_x.icon_id)
             props.copy_rot = False
             props.copy_rot_x = False
             props.copy_rot_y = False
@@ -628,7 +686,7 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
             props.copy_loc_y = False
             props.copy_loc_z = False
             
-            props = row.operator("tpc_ot.cursor_copy", text="", icon ='EVENT_Y')
+            props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_loca_y.icon_id)
             props.copy_rot = False
             props.copy_rot_x = False
             props.copy_rot_y = False
@@ -638,7 +696,7 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
             props.copy_loc_y = True
             props.copy_loc_z = False                    
             
-            props = row.operator("tpc_ot.cursor_copy", text="", icon ='EVENT_Z')
+            props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_loca_z.icon_id)
             props.copy_rot = False
             props.copy_rot_x = False
             props.copy_rot_y = False
@@ -648,7 +706,7 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
             props.copy_loc_y = False
             props.copy_loc_z = True                       
             
-            props = row.operator("tpc_ot.cursor_copy", text="", icon ='EVENT_A')
+            props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_loca_xyz.icon_id)
             props.copy_rot = False
             props.copy_rot_x = False
             props.copy_rot_y = False
@@ -659,12 +717,12 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
             props.copy_loc_z = False    
       
 
-            # cursor copy
+            # align to cursor rotation
             row = box.row(align=True)                     
             row.alignment = 'RIGHT' 
-            row.label(text="Cursor Rotate :")
+            row.label(text="Cursor Rotation :")
                 
-            props = row.operator("tpc_ot.cursor_copy", text="", icon ='EVENT_X')
+            props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_rota_x.icon_id)
             props.copy_rot = False
             props.copy_rot_x = True
             props.copy_rot_y = False
@@ -674,7 +732,7 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
             props.copy_loc_y = False
             props.copy_loc_z = False
             
-            props = row.operator("tpc_ot.cursor_copy", text="", icon ='EVENT_Y')
+            props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_rota_y.icon_id)
             props.copy_rot = False
             props.copy_rot_x = False
             props.copy_rot_y = True
@@ -684,7 +742,7 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
             props.copy_loc_y = False
             props.copy_loc_z = False
             
-            props = row.operator("tpc_ot.cursor_copy", text="", icon ='EVENT_Z')
+            props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_rota_z.icon_id)
             props.copy_rot = False
             props.copy_rot_x = False
             props.copy_rot_y = False
@@ -694,7 +752,7 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
             props.copy_loc_y = False
             props.copy_loc_z = False
             
-            props = row.operator("tpc_ot.cursor_copy", text="", icon ='EVENT_A')
+            props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_rota_xyz.icon_id)
             props.copy_rot = True
             props.copy_rot_x = False
             props.copy_rot_y = False
@@ -703,33 +761,6 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
             props.copy_loc_x = False
             props.copy_loc_y = False
             props.copy_loc_z = False
-
-
-            # align to axis
-            row = box.row(align=True)                      
-            row.alignment = 'RIGHT' 
-            row.label(text="World Axis :")
-
-            props = row.operator("tpc_ot.align_object_to_axis", text="", icon ='EVENT_X')
-            props.use_align_axis_x=True   
-            props.use_align_axis_y=False   
-            props.use_align_axis_z=False     
-
-            props = row.operator("tpc_ot.align_object_to_axis",text="", icon ='EVENT_Y')
-            props.use_align_axis_x=False   
-            props.use_align_axis_y=True   
-            props.use_align_axis_z=False    
-
-            props = row.operator("tpc_ot.align_object_to_axis",text="", icon ='EVENT_Z')
-            props.use_align_axis_x=False   
-            props.use_align_axis_y=False   
-            props.use_align_axis_z=True     
-
-            props = row.operator("tpc_ot.align_object_to_axis",text="", icon ='EVENT_A')
-            props.use_align_axis_x=True   
-            props.use_align_axis_y=True   
-            props.use_align_axis_z=True              
-
 
 
         if context.mode == 'EDIT_MESH':
@@ -849,24 +880,26 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
                 else:  
 
                     row = box.row(align=True)                                                   
-                    row.operator("object.align_location_x", text="", icon ='EVENT_X')
-                    row.operator("object.align_location_y", text="", icon ='EVENT_Y')
-                    row.operator("object.align_location_z", text="", icon ='EVENT_Z')
-                    row.operator("object.align_location_all", text="", icon ='EVENT_A')
-                    row.label(text=": Align Locate")   
+                    row.operator("object.align_location_x", text="", icon_value=button_align_x.icon_id)
+                    row.operator("object.align_location_y", text="", icon_value=button_align_y.icon_id)
+                    row.operator("object.align_location_z", text="", icon_value=button_align_z.icon_id)
+                    row.operator("object.align_location_all", text="", icon_value=button_align_xyz.icon_id)
+                    row.label(text=": Align Location")   
+
 
                     row = box.row(align=True)              
-                    row.operator("object.align_rotation_x", text="", icon ='EVENT_X')
-                    row.operator("object.align_rotation_y", text="", icon ='EVENT_Y')
-                    row.operator("object.align_rotation_z", text="", icon ='EVENT_Z')
-                    row.operator("object.align_rotation_all", text="", icon ='EVENT_A')
-                    row.label(text=": Align Rotate") 
+                    row.operator("object.align_rotation_x", text="", icon_value=button_rota_x.icon_id)
+                    row.operator("object.align_rotation_y", text="", icon_value=button_rota_y.icon_id)
+                    row.operator("object.align_rotation_z", text="", icon_value=button_rota_z.icon_id)
+                    row.operator("object.align_rotation_all", text="", icon_value=button_rota_xyz.icon_id)
+                    row.label(text=": Align Rotation") 
+
 
                     row = box.row(align=True)                                      
-                    row.operator("object.align_objects_scale_x", text="", icon ='EVENT_X')
-                    row.operator("object.align_objects_scale_y", text="", icon ='EVENT_Y')
-                    row.operator("object.align_objects_scale_z", text="", icon ='EVENT_Z')
-                    row.operator("object.align_objects_scale_all", text="", icon ='EVENT_A')
+                    row.operator("object.align_objects_scale_x", text="", icon_value=button_scale_x.icon_id)
+                    row.operator("object.align_objects_scale_y", text="", icon_value=button_scale_y.icon_id)
+                    row.operator("object.align_objects_scale_z", text="", icon_value=button_scale_z.icon_id)
+                    row.operator("object.align_objects_scale_all", text="", icon_value=button_scale_xyz.icon_id)
                     row.label(text=": Align Scale")
 
 

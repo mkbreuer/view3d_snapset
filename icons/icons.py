@@ -42,10 +42,37 @@ def load_icons():
 
     mkb_icons.load("icon_align_x", os.path.join(icons_dir, "align_x.png"), 'IMAGE')    
     mkb_icons.load("icon_align_y", os.path.join(icons_dir, "align_y.png"), 'IMAGE')    
-    mkb_icons.load("icon_align_z", os.path.join(icons_dir, "align_z.png"), 'IMAGE')    
+    mkb_icons.load("icon_align_z", os.path.join(icons_dir, "align_z.png"), 'IMAGE') 
+    mkb_icons.load("icon_align_xyz", os.path.join(icons_dir, "align_xyz.png"), 'IMAGE') 
+
     mkb_icons.load("icon_align_xy", os.path.join(icons_dir, "align_xy.png"), 'IMAGE')    
     mkb_icons.load("icon_align_zx", os.path.join(icons_dir, "align_zx.png"), 'IMAGE')    
     mkb_icons.load("icon_align_zy", os.path.join(icons_dir, "align_zy.png"), 'IMAGE')   
+
+    mkb_icons.load("icon_rota_x", os.path.join(icons_dir, "rota_x.png"), 'IMAGE') 
+    mkb_icons.load("icon_rota_y", os.path.join(icons_dir, "rota_y.png"), 'IMAGE') 
+    mkb_icons.load("icon_rota_z", os.path.join(icons_dir, "rota_z.png"), 'IMAGE') 
+    mkb_icons.load("icon_rota_xyz", os.path.join(icons_dir, "rota_xyz.png"), 'IMAGE') 
+
+    mkb_icons.load("icon_scale_x", os.path.join(icons_dir, "scale_x.png"), 'IMAGE')    
+    mkb_icons.load("icon_scale_y", os.path.join(icons_dir, "scale_y.png"), 'IMAGE')    
+    mkb_icons.load("icon_scale_z", os.path.join(icons_dir, "scale_z.png"), 'IMAGE')    
+    mkb_icons.load("icon_scale_xyz", os.path.join(icons_dir, "scale_xyz.png"), 'IMAGE')    
+
+    mkb_icons.load("icon_world_x", os.path.join(icons_dir, "world_x.png"), 'IMAGE') 
+    mkb_icons.load("icon_world_y", os.path.join(icons_dir, "world_y.png"), 'IMAGE') 
+    mkb_icons.load("icon_world_z", os.path.join(icons_dir, "world_z.png"), 'IMAGE') 
+    mkb_icons.load("icon_world_xyz", os.path.join(icons_dir, "world_xyz.png"), 'IMAGE') 
+ 
+    mkb_icons.load("icon_cursor_loca_x", os.path.join(icons_dir, "cursor_loca_x.png"), 'IMAGE') 
+    mkb_icons.load("icon_cursor_loca_y", os.path.join(icons_dir, "cursor_loca_y.png"), 'IMAGE') 
+    mkb_icons.load("icon_cursor_loca_z", os.path.join(icons_dir, "cursor_loca_z.png"), 'IMAGE') 
+    mkb_icons.load("icon_cursor_loca_xyz", os.path.join(icons_dir, "cursor_loca_xyz.png"), 'IMAGE') 
+
+    mkb_icons.load("icon_cursor_rota_x", os.path.join(icons_dir, "cursor_rota_x.png"), 'IMAGE') 
+    mkb_icons.load("icon_cursor_rota_y", os.path.join(icons_dir, "cursor_rota_y.png"), 'IMAGE') 
+    mkb_icons.load("icon_cursor_rota_z", os.path.join(icons_dir, "cursor_rota_z.png"), 'IMAGE') 
+    mkb_icons.load("icon_cursor_rota_xyz", os.path.join(icons_dir, "cursor_rota_xyz.png"), 'IMAGE') 
 
     mkb_icons.load("icon_event_x", os.path.join(icons_dir, "event_x.png"), 'IMAGE')    
     mkb_icons.load("icon_event_y", os.path.join(icons_dir, "event_y.png"), 'IMAGE')    
