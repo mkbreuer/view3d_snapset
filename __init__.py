@@ -25,7 +25,7 @@ bl_info = {
     "author": "marvin.k.breuer (MKB)",
     "version": (0, 3, 4),
     "blender": (2, 81, 0),
-    "location": "3D View > different location: Sidebar [N], Default Menu [SHIFT+W], Special Menu [W], Shortcut [F], in Header Snap Settings, etc.",
+    "location": "3D View > Default Tab: Align > Panel: SnapSet",
     "description": "Full customizable preset buttons for snapping task",
     "warning": "",
     "wiki_url": "https://github.com/mkbreuer/view3d_snapset",
@@ -80,7 +80,7 @@ modules = developer_utils.setup_addon_modules(__path__, __name__, "bpy" in local
 class VIEW3D_PT_snapset_panel_ui(bpy.types.Panel):
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
-    bl_category = 'Item'
+    bl_category = 'Align'
     bl_label = "SnapSet"
     bl_options = {'DEFAULT_CLOSED'}
 
@@ -201,7 +201,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
     category : StringProperty(
               name="Tab Category",
               description="category name for the tab in the sidebar",
-              default="Item",
+              default="Align",
               update=update_panel
               )
 
@@ -1145,9 +1145,13 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
             box.separator() 
 
             row = box.column(align=True)       
-            row.label(text="> Customizable snap presets for the 3d view.")       
-            row.label(text="> The pivot and snap functions will be changed ")                     
-            row.label(text="> for respective task at the same time.")                     
+            row.label(text="> This addon includes mainly snap presets for the 3d view.")       
+            row.label(text="> The pivot and snap functions will be changed for respective task at the same time.")                     
+            row.label(text="> This can be done with durable or modal* single-use buttons.")                     
+            row.label(text="> Different menus available for: special menu [W] or for the 3d view header settings.")                     
+            row.label(text="> Or can be used with a custom context menu, pie menu or direct shortcuts.")                     
+            row.label(text="> All snap preset buttons are fully customizable.")                     
+            row.label(text="> Auxiliary addons can be enabled for the pie menu: Align tools, Looptools or Align Mesh.")                     
                        
             row.separator()             
           
