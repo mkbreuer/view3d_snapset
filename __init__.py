@@ -280,6 +280,7 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
         default='menu', update = update_snapset_menu)
 
     toggle_pie_layout : BoolProperty(name="Layout 1/2", description="pie menu layout", default=True)   
+    toggle_pie_box_switch : BoolProperty(name="Switch Pie Menu Box 7-8", description="pie menu layout", default=False)   
     toggle_button_switch : BoolProperty(name="Durables/Modals*", description="switch buttons in pie menu", default=False)   
 
     hotkey_menu : StringProperty(name = 'Key', default="W", description = 'change hotkey / only capital letters allowed') 
@@ -1485,13 +1486,19 @@ class Addon_Preferences_Snapset(bpy.types.AddonPreferences):
                                                   
                     row = box.column(align=True)                                                                  
                     row.prop(self, 'tpc_use_emposs')
-                 
+         
+                    box.separator()
+                    
+                    row = box.row(align=True)
+                    row.prop(self, "toggle_pie_box_switch", text='')  
+                    row.label(text="Toggle Pie Menu Box = World Align <-> Object Align")  
+
                     box.separator() 
 
                     row = box.row(align=True)
                     row.prop(snap_global, "toggle_pie_buttons", text='')  
                     row.label(text="Toggle Pie Menu Buttons")  
-         
+
                     box.separator()  
                     
                     icon_snap_grid = icons.get("icon_snap_grid")  

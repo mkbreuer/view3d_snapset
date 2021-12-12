@@ -41,6 +41,230 @@ class VIEW3D_MT_snapset_menu_pencil(bpy.types.Menu):
 
 
 
+def draw_snapset_pie_box_objects(context, layout, box):
+    
+    addon_prefs = get_addon_prefs()
+    icons = load_icons()
+
+    button_align_x   = icons.get("icon_align_x") 
+    button_align_y   = icons.get("icon_align_y") 
+    button_align_z   = icons.get("icon_align_z") 
+    button_align_xyz = icons.get("icon_align_xyz") 
+
+    button_rota_x   = icons.get("icon_rota_x") 
+    button_rota_y   = icons.get("icon_rota_y") 
+    button_rota_z   = icons.get("icon_rota_z") 
+    button_rota_xyz = icons.get("icon_rota_xyz") 
+
+    button_scale_x   = icons.get("icon_scale_x") 
+    button_scale_y   = icons.get("icon_scale_y") 
+    button_scale_z   = icons.get("icon_scale_z") 
+    button_scale_xyz = icons.get("icon_scale_xyz") 
+
+    align_addon = "space_view3d_align_tools" 
+    align_state = addon_utils.check(align_addon)
+    if not align_state[0]:               
+        
+        row = box.row(align=False)
+        row.operator_context = 'INVOKE_REGION_WIN'
+        row.operator("preferences.addon_show", text="", icon="FRAME_NEXT").module="space_view3d_align_tools"                  
+        row.operator("tpc_ot.activate_align_tools", text="Activate: Align Tools", icon="ERROR")              
+
+    else:  
+
+        row = box.row(align=True)  
+        if addon_prefs.toggle_pie_box_switch == True:
+            row.alignment = 'RIGHT'  
+            row.label(text="Align Location :")           
+        row.operator("object.align_location_x", text="", icon_value=button_align_x.icon_id)
+        row.operator("object.align_location_y", text="", icon_value=button_align_y.icon_id)
+        row.operator("object.align_location_z", text="", icon_value=button_align_z.icon_id)
+        row.operator("object.align_location_all", text="", icon_value=button_align_xyz.icon_id)
+        if addon_prefs.toggle_pie_box_switch == False:
+            row.alignment = 'LEFT'   
+            row.label(text=": Align Location")   
+
+
+        row = box.row(align=True)  
+        if addon_prefs.toggle_pie_box_switch == True:
+            row.alignment = 'RIGHT'  
+            row.label(text="Align Rotation :") 
+        row.operator("object.align_rotation_x", text="", icon_value=button_rota_x.icon_id)
+        row.operator("object.align_rotation_y", text="", icon_value=button_rota_y.icon_id)
+        row.operator("object.align_rotation_z", text="", icon_value=button_rota_z.icon_id)
+        row.operator("object.align_rotation_all", text="", icon_value=button_rota_xyz.icon_id)
+        if addon_prefs.toggle_pie_box_switch == False:
+            row.alignment = 'LEFT'   
+            row.label(text=": Align Rotation") 
+
+
+        row = box.row(align=True)
+        if addon_prefs.toggle_pie_box_switch == True:
+            row.alignment = 'RIGHT'  
+            row.label(text="Align Scale :")
+        row.operator("object.align_objects_scale_x", text="", icon_value=button_scale_x.icon_id)
+        row.operator("object.align_objects_scale_y", text="", icon_value=button_scale_y.icon_id)
+        row.operator("object.align_objects_scale_z", text="", icon_value=button_scale_z.icon_id)
+        row.operator("object.align_objects_scale_all", text="", icon_value=button_scale_xyz.icon_id)
+        if addon_prefs.toggle_pie_box_switch == False:
+            row.alignment = 'LEFT'  
+            row.label(text=": Align Scale")
+
+
+
+def draw_snapset_pie_box_world(context, layout, box):
+
+    addon_prefs = get_addon_prefs()    
+    icons = load_icons()
+
+    button_world_x   = icons.get("icon_world_x") 
+    button_world_y   = icons.get("icon_world_y") 
+    button_world_z   = icons.get("icon_world_z") 
+    button_world_xyz = icons.get("icon_world_xyz") 
+
+    button_cursor_loca_x   = icons.get("icon_cursor_loca_x") 
+    button_cursor_loca_y   = icons.get("icon_cursor_loca_y") 
+    button_cursor_loca_z   = icons.get("icon_cursor_loca_z") 
+    button_cursor_loca_xyz = icons.get("icon_cursor_loca_xyz") 
+
+    button_cursor_rota_x   = icons.get("icon_cursor_rota_x") 
+    button_cursor_rota_y   = icons.get("icon_cursor_rota_y") 
+    button_cursor_rota_z   = icons.get("icon_cursor_rota_z") 
+    button_cursor_rota_xyz = icons.get("icon_cursor_rota_xyz") 
+
+    # align selcted to global world axis
+    row = box.row(align=True)  
+    if addon_prefs.toggle_pie_box_switch == False:                    
+        row.alignment = 'RIGHT' 
+        row.label(text="World Axis :")
+
+    props = row.operator("tpc_ot.align_object_to_axis",text="", icon_value=button_world_x.icon_id)
+    props.use_align_axis_x=True   
+    props.use_align_axis_y=False   
+    props.use_align_axis_z=False     
+
+    props = row.operator("tpc_ot.align_object_to_axis",text="", icon_value=button_world_y.icon_id)
+    props.use_align_axis_x=False   
+    props.use_align_axis_y=True   
+    props.use_align_axis_z=False    
+
+    props = row.operator("tpc_ot.align_object_to_axis",text="", icon_value=button_world_z.icon_id)
+    props.use_align_axis_x=False   
+    props.use_align_axis_y=False   
+    props.use_align_axis_z=True     
+
+    props = row.operator("tpc_ot.align_object_to_axis",text="", icon_value=button_world_xyz.icon_id)
+    props.use_align_axis_x=True   
+    props.use_align_axis_y=True   
+    props.use_align_axis_z=True              
+
+    if addon_prefs.toggle_pie_box_switch == True:                    
+        row.alignment = 'LEFT' 
+        row.label(text=": World Axis")
+
+
+    # align to cursor location
+    row = box.row(align=True)  
+    if addon_prefs.toggle_pie_box_switch == False:                       
+        row.alignment = 'RIGHT' 
+        row.label(text="Cursor Location :")              
+
+    props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_loca_x.icon_id)
+    props.copy_rot = False
+    props.copy_rot_x = False
+    props.copy_rot_y = False
+    props.copy_rot_z = False
+    props.copy_loc = False
+    props.copy_loc_x = True
+    props.copy_loc_y = False
+    props.copy_loc_z = False
+    
+    props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_loca_y.icon_id)
+    props.copy_rot = False
+    props.copy_rot_x = False
+    props.copy_rot_y = False
+    props.copy_rot_z = False
+    props.copy_loc = False
+    props.copy_loc_x = False
+    props.copy_loc_y = True
+    props.copy_loc_z = False                    
+    
+    props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_loca_z.icon_id)
+    props.copy_rot = False
+    props.copy_rot_x = False
+    props.copy_rot_y = False
+    props.copy_rot_z = False
+    props.copy_loc = False
+    props.copy_loc_x = False
+    props.copy_loc_y = False
+    props.copy_loc_z = True                       
+    
+    props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_loca_xyz.icon_id)
+    props.copy_rot = False
+    props.copy_rot_x = False
+    props.copy_rot_y = False
+    props.copy_rot_z = False
+    props.copy_loc = True
+    props.copy_loc_x = False
+    props.copy_loc_y = False
+    props.copy_loc_z = False    
+
+    if addon_prefs.toggle_pie_box_switch == True:                    
+        row.alignment = 'LEFT' 
+        row.label(text=": Cursor Location")
+
+
+    # align to cursor rotation
+    row = box.row(align=True)  
+    if addon_prefs.toggle_pie_box_switch == False:                    
+        row.alignment = 'RIGHT' 
+        row.label(text="Cursor Rotation :")
+        
+    props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_rota_x.icon_id)
+    props.copy_rot = False
+    props.copy_rot_x = True
+    props.copy_rot_y = False
+    props.copy_rot_z = False
+    props.copy_loc = False
+    props.copy_loc_x = False
+    props.copy_loc_y = False
+    props.copy_loc_z = False
+    
+    props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_rota_y.icon_id)
+    props.copy_rot = False
+    props.copy_rot_x = False
+    props.copy_rot_y = True
+    props.copy_rot_z = False                    
+    props.copy_loc = False
+    props.copy_loc_x = False
+    props.copy_loc_y = False
+    props.copy_loc_z = False
+    
+    props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_rota_z.icon_id)
+    props.copy_rot = False
+    props.copy_rot_x = False
+    props.copy_rot_y = False
+    props.copy_rot_z = True                       
+    props.copy_loc = False
+    props.copy_loc_x = False
+    props.copy_loc_y = False
+    props.copy_loc_z = False
+    
+    props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_rota_xyz.icon_id)
+    props.copy_rot = True
+    props.copy_rot_x = False
+    props.copy_rot_y = False
+    props.copy_rot_z = False    
+    props.copy_loc = False
+    props.copy_loc_x = False
+    props.copy_loc_y = False
+    props.copy_loc_z = False
+
+    if addon_prefs.toggle_pie_box_switch == True:                    
+        row.alignment = 'LEFT' 
+        row.label(text=": Cursor Rotation")
+
+
 
 # UI: HOTKEY MENU PIE # 
 class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
@@ -59,7 +283,6 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
 
         pie = layout.menu_pie()      
 
-
 #Box1 L
         box = pie.split().column(align=True)
         box.scale_x = addon_prefs.ui_scale_x_b1       
@@ -67,8 +290,6 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
         box.separator() 
         box.separator() 
         
-
-
 
         if addon_prefs.toggle_button_switch == False:
            
@@ -605,37 +826,6 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
         box.separator()    
         box.separator()    
 
-        button_align_x   = icons.get("icon_align_x") 
-        button_align_y   = icons.get("icon_align_y") 
-        button_align_z   = icons.get("icon_align_z") 
-        button_align_xyz = icons.get("icon_align_xyz") 
-
-        button_rota_x   = icons.get("icon_rota_x") 
-        button_rota_y   = icons.get("icon_rota_y") 
-        button_rota_z   = icons.get("icon_rota_z") 
-        button_rota_xyz = icons.get("icon_rota_xyz") 
-
-        button_scale_x   = icons.get("icon_scale_x") 
-        button_scale_y   = icons.get("icon_scale_y") 
-        button_scale_z   = icons.get("icon_scale_z") 
-        button_scale_xyz = icons.get("icon_scale_xyz") 
-
-        button_world_x   = icons.get("icon_world_x") 
-        button_world_y   = icons.get("icon_world_y") 
-        button_world_z   = icons.get("icon_world_z") 
-        button_world_xyz = icons.get("icon_world_xyz") 
-
-        button_cursor_loca_x   = icons.get("icon_cursor_loca_x") 
-        button_cursor_loca_y   = icons.get("icon_cursor_loca_y") 
-        button_cursor_loca_z   = icons.get("icon_cursor_loca_z") 
-        button_cursor_loca_xyz = icons.get("icon_cursor_loca_xyz") 
-
-        button_cursor_rota_x   = icons.get("icon_cursor_rota_x") 
-        button_cursor_rota_y   = icons.get("icon_cursor_rota_y") 
-        button_cursor_rota_z   = icons.get("icon_cursor_rota_z") 
-        button_cursor_rota_xyz = icons.get("icon_cursor_rota_xyz") 
-
-
         if addon_prefs.toggle_button_switch == False:           
             box.separator()                 
             box.separator()    
@@ -644,123 +834,12 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
             box.separator()   
       
         if context.mode == 'OBJECT':
-           
-            # align selcted to global world axis
-            row = box.row(align=True)                      
-            row.alignment = 'RIGHT' 
-            row.label(text="World Axis :")
-
-            props = row.operator("tpc_ot.align_object_to_axis",text="", icon_value=button_world_x.icon_id)
-            props.use_align_axis_x=True   
-            props.use_align_axis_y=False   
-            props.use_align_axis_z=False     
-
-            props = row.operator("tpc_ot.align_object_to_axis",text="", icon_value=button_world_y.icon_id)
-            props.use_align_axis_x=False   
-            props.use_align_axis_y=True   
-            props.use_align_axis_z=False    
-
-            props = row.operator("tpc_ot.align_object_to_axis",text="", icon_value=button_world_z.icon_id)
-            props.use_align_axis_x=False   
-            props.use_align_axis_y=False   
-            props.use_align_axis_z=True     
-
-            props = row.operator("tpc_ot.align_object_to_axis",text="", icon_value=button_world_xyz.icon_id)
-            props.use_align_axis_x=True   
-            props.use_align_axis_y=True   
-            props.use_align_axis_z=True              
-
-
-            # align to cursor location
-            row = box.row(align=True)                       
-            row.alignment = 'RIGHT' 
-            row.label(text="Cursor Location :")              
-
-            props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_loca_x.icon_id)
-            props.copy_rot = False
-            props.copy_rot_x = False
-            props.copy_rot_y = False
-            props.copy_rot_z = False
-            props.copy_loc = False
-            props.copy_loc_x = True
-            props.copy_loc_y = False
-            props.copy_loc_z = False
             
-            props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_loca_y.icon_id)
-            props.copy_rot = False
-            props.copy_rot_x = False
-            props.copy_rot_y = False
-            props.copy_rot_z = False
-            props.copy_loc = False
-            props.copy_loc_x = False
-            props.copy_loc_y = True
-            props.copy_loc_z = False                    
-            
-            props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_loca_z.icon_id)
-            props.copy_rot = False
-            props.copy_rot_x = False
-            props.copy_rot_y = False
-            props.copy_rot_z = False
-            props.copy_loc = False
-            props.copy_loc_x = False
-            props.copy_loc_y = False
-            props.copy_loc_z = True                       
-            
-            props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_loca_xyz.icon_id)
-            props.copy_rot = False
-            props.copy_rot_x = False
-            props.copy_rot_y = False
-            props.copy_rot_z = False
-            props.copy_loc = True
-            props.copy_loc_x = False
-            props.copy_loc_y = False
-            props.copy_loc_z = False    
-      
+            if addon_prefs.toggle_pie_box_switch == False: 
+                draw_snapset_pie_box_world(context, layout, box)
+            else:   
+                draw_snapset_pie_box_objects(context, layout, box)  
 
-            # align to cursor rotation
-            row = box.row(align=True)                     
-            row.alignment = 'RIGHT' 
-            row.label(text="Cursor Rotation :")
-                
-            props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_rota_x.icon_id)
-            props.copy_rot = False
-            props.copy_rot_x = True
-            props.copy_rot_y = False
-            props.copy_rot_z = False
-            props.copy_loc = False
-            props.copy_loc_x = False
-            props.copy_loc_y = False
-            props.copy_loc_z = False
-            
-            props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_rota_y.icon_id)
-            props.copy_rot = False
-            props.copy_rot_x = False
-            props.copy_rot_y = True
-            props.copy_rot_z = False                    
-            props.copy_loc = False
-            props.copy_loc_x = False
-            props.copy_loc_y = False
-            props.copy_loc_z = False
-            
-            props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_rota_z.icon_id)
-            props.copy_rot = False
-            props.copy_rot_x = False
-            props.copy_rot_y = False
-            props.copy_rot_z = True                       
-            props.copy_loc = False
-            props.copy_loc_x = False
-            props.copy_loc_y = False
-            props.copy_loc_z = False
-            
-            props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_rota_xyz.icon_id)
-            props.copy_rot = True
-            props.copy_rot_x = False
-            props.copy_rot_y = False
-            props.copy_rot_z = False    
-            props.copy_loc = False
-            props.copy_loc_x = False
-            props.copy_loc_y = False
-            props.copy_loc_z = False
 
 
         if context.mode == 'EDIT_MESH':
@@ -868,42 +947,11 @@ class VIEW3D_MT_snapset_menu_pie_2(bpy.types.Menu):
 
             if addon_prefs.toggle_addon_align_tools == True:   
 
-                align_addon = "space_view3d_align_tools" 
-                align_state = addon_utils.check(align_addon)
-                if not align_state[0]:               
-                    
-                    row = box.row(align=False)
-                    row.operator_context = 'INVOKE_REGION_WIN'
-                    row.operator("preferences.addon_show", text="", icon="FRAME_NEXT").module="space_view3d_align_tools"                  
-                    row.operator("tpc_ot.activate_align_tools", text="Activate: Align Tools", icon="ERROR")              
+                if addon_prefs.toggle_pie_box_switch == False: 
+                    draw_snapset_pie_box_objects(context, layout, box)
+                else:   
+                    draw_snapset_pie_box_world(context, layout, box)  
 
-                else:  
-
-                    row = box.row(align=True)                                                   
-                    row.operator("object.align_location_x", text="", icon_value=button_align_x.icon_id)
-                    row.operator("object.align_location_y", text="", icon_value=button_align_y.icon_id)
-                    row.operator("object.align_location_z", text="", icon_value=button_align_z.icon_id)
-                    row.operator("object.align_location_all", text="", icon_value=button_align_xyz.icon_id)
-                    row.label(text=": Align Location")   
-
-
-                    row = box.row(align=True)              
-                    row.operator("object.align_rotation_x", text="", icon_value=button_rota_x.icon_id)
-                    row.operator("object.align_rotation_y", text="", icon_value=button_rota_y.icon_id)
-                    row.operator("object.align_rotation_z", text="", icon_value=button_rota_z.icon_id)
-                    row.operator("object.align_rotation_all", text="", icon_value=button_rota_xyz.icon_id)
-                    row.label(text=": Align Rotation") 
-
-
-                    row = box.row(align=True)                                      
-                    row.operator("object.align_objects_scale_x", text="", icon_value=button_scale_x.icon_id)
-                    row.operator("object.align_objects_scale_y", text="", icon_value=button_scale_y.icon_id)
-                    row.operator("object.align_objects_scale_z", text="", icon_value=button_scale_z.icon_id)
-                    row.operator("object.align_objects_scale_all", text="", icon_value=button_scale_xyz.icon_id)
-                    row.label(text=": Align Scale")
-
-
-       
         if context.mode == 'EDIT_MESH':
 
             box.separator()                 
