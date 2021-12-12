@@ -117,70 +117,69 @@ def func_cursor_copy(self, context):
         for obj in obj_list:  
             view_layer.objects.active = obj   
             obj.select_set(state=True) 
-                
-            # ROTATION
-            if self.copy_rot == True:
-                obj.rotation_euler[0] = bpy.context.scene.cursor.rotation_euler[0]
-                obj.rotation_euler[1] = bpy.context.scene.cursor.rotation_euler[1]
-                obj.rotation_euler[2] = bpy.context.scene.cursor.rotation_euler[2]                
-                rot_x = 'X' 
-                rot_y = 'Y' 
-                rot_z = 'Z' 
 
-            else:
-                if self.copy_rot_x == True:
-                    obj.rotation_euler[1] = bpy.context.scene.cursor.rotation_euler[0]
-                    rot_x = 'X'                   
-                else:                        
-                    rot_x = '' 
-
-                if self.copy_rot_y == True:
-                    obj.rotation_euler[0] = bpy.context.scene.cursor.rotation_euler[1]         
-                    rot_y = 'Y'                                        
-                else:                        
-                    rot_y = '' 
-
-                if self.copy_rot_z == True:
-                    obj.rotation_euler[2] = bpy.context.scene.cursor.rotation_euler[2]
-                    rot_z = 'Z'                    
-                else:                        
-                    rot_z = ''                   
-
+            scene = bpy.context.scene
 
             # LOCATION             
             if self.copy_loc == True:
-                obj.location[0] = bpy.context.scene.cursor.location[0]
-                obj.location[1] = bpy.context.scene.cursor.location[1]
-                obj.location[2] = bpy.context.scene.cursor.location[2]                     
+                obj.location[0] = scene.cursor.location[0]
+                obj.location[1] = scene.cursor.location[1]
+                obj.location[2] = scene.cursor.location[2]                     
                 loc_x = 'X' 
                 loc_y = 'Y' 
-                loc_z = 'Z' 
+                loc_z = 'Z Location'
           
-            else:
-
+            else:              
                 if self.copy_loc_x == True:
-                    obj.location[1] = bpy.context.scene.cursor.location[0]
-                    loc_x = 'X'     
+                    obj.location[0] = scene.cursor.location[0]
+                    loc_x = 'X Location'   
                 else:
-                    loc_x = '-'                    
+                    loc_x = ''                    
  
                 if self.copy_loc_y == True:
-                    obj.location[0] = bpy.context.scene.cursor.location[1]         
-                    loc_y = 'Y'                   
+                    obj.location[1] = scene.cursor.location[1]         
+                    loc_y = 'Y Location'                         
                 else:
                     loc_y = ''   
 
                 if self.copy_loc_z == True:
-                    obj.location[2] = bpy.context.scene.cursor.location[2]
-                    loc_z = 'Z'                    
+                    obj.location[2] = scene.cursor.location[2]
+                    loc_z = 'Z Location'               
                 else:
-                    loc_z = ''   
+                    loc_z = ''         
 
-       
-          
-            message = ("Copy: " + rot_x + rot_y + rot_z + ' Rotation' + ' / ' + loc_x + loc_y + loc_z + ' Location')
+
+            # ROTATION
+            if self.copy_rot == True:
+
+                obj.rotation_euler[0] = scene.cursor.rotation_euler[0]
+                obj.rotation_euler[1] = scene.cursor.rotation_euler[1]
+                obj.rotation_euler[2] = scene.cursor.rotation_euler[2]                
+                rot_x = 'X' 
+                rot_y = 'Y' 
+                rot_z = 'Z Rotation'
+
+            else:            
+                if self.copy_rot_x == True:
+                    obj.rotation_euler[0] = scene.cursor.rotation_euler[0]
+                    rot_x = 'X Rotation'                 
+                else:                        
+                    rot_x = '' 
+
+                if self.copy_rot_y == True:
+                    obj.rotation_euler[1] = scene.cursor.rotation_euler[1]         
+                    rot_y = 'Y Rotation'                                      
+                else:                        
+                    rot_y = '' 
+
+                if self.copy_rot_z == True:
+                    obj.rotation_euler[2] = scene.cursor.rotation_euler[2]
+                    rot_z = 'Z Rotation'                
+                else:                        
+                    rot_z = ''                   
+    
+            message = ("Copy Cursor: " + rot_x + rot_y + rot_z + loc_x + loc_y + loc_z)
             self.report({'INFO'}, message)
-
     else:
         self.report({'INFO'}, 'No Selection!')       
 

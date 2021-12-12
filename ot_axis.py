@@ -49,33 +49,33 @@ class VIEW3D_OT_align_object_to_axis(bpy.types.Operator):
 
             if self.use_align_axis_x == True and self.use_align_axis_y == False and self.use_align_axis_z == False:   
                 obj.location[1] = 0
-                axis_x = 'X'                    
+                axis_x = 'X Align'                    
 
             if self.use_align_axis_x == False and self.use_align_axis_y == True and self.use_align_axis_z == False:   
                 obj.location[0] = 0                  
-                axis_y = 'Y'                    
+                axis_y = 'Y Align'                    
              
             if self.use_align_axis_x == False and self.use_align_axis_y == False and self.use_align_axis_z == True:   
                 obj.location[2] = 0                 
-                axis_z = 'Z' 
+                axis_z = 'Z Align' 
 
             if self.use_align_axis_x == True and self.use_align_axis_y == True and self.use_align_axis_z == False:   
                 obj.location[1] = 0
                 obj.location[0] = 0
                 axis_x = 'X'                    
-                axis_y = 'Y'                    
+                axis_y = 'Y Align'                    
 
             if self.use_align_axis_x == True and self.use_align_axis_y == False and self.use_align_axis_z == True:   
                 obj.location[1] = 0
                 obj.location[2] = 0     
                 axis_x = 'X'                                      
-                axis_z = 'Z' 
+                axis_z = 'Z Align' 
 
             if self.use_align_axis_x == False and self.use_align_axis_y == True and self.use_align_axis_z == True:   
                 obj.location[0] = 0
                 obj.location[2] = 0                  
                 axis_y = 'Y'                    
-                axis_z = 'Z'  
+                axis_z = 'Z Align'  
 
             if self.use_align_axis_x == True and self.use_align_axis_y == True and self.use_align_axis_z == True:   
                 obj.location[0] = 0
@@ -83,11 +83,11 @@ class VIEW3D_OT_align_object_to_axis(bpy.types.Operator):
                 obj.location[2] = 0
                 axis_x = 'X'                    
                 axis_y = 'Y'                    
-                axis_z = 'Z'                                     
+                axis_z = 'Z Align'                                     
 
         bpy.ops.object.mode_set(mode=current_mode) 
 
-        message = ("Axis: " + axis_x + axis_y + axis_z)
+        message = ("World Axis: " + axis_x + axis_y + axis_z)
         self.report({'INFO'}, message)
         return {'FINISHED'}
     
