@@ -17,7 +17,6 @@ class VIEW3D_OT_align_object_to_axis(bpy.types.Operator):
     use_align_axis_y : BoolProperty(name="Y",  description=" ", default=False, options={'SKIP_SAVE'})    
     use_align_axis_z : BoolProperty(name="Z",  description=" ", default=False, options={'SKIP_SAVE'})   
 
-
     def draw(self, context):
         layout = self.layout   
 
