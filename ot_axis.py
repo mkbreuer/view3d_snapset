@@ -34,11 +34,18 @@ class VIEW3D_OT_align_object_to_axis(bpy.types.Operator):
 
     def execute(self, context):   
 
-        current_mode = bpy.context.object.mode 
-        bpy.ops.object.mode_set(mode = 'OBJECT')
+        view_layer = bpy.context.view_layer  
+        selected = bpy.context.selected_objects        
+        obj_list = [obj for obj in selected]
+       
+        if obj_list: 
+            current_mode = bpy.context.object.mode 
+            bpy.ops.object.mode_set(mode = 'OBJECT')
+        else:
+            self.report({'INFO'}, 'No active selection!')
+            return {'CANCELLED'}   
 
-        view_layer = bpy.context.view_layer
-        selected = bpy.context.selected_objects
+
         for obj in selected:
             view_layer.objects.active = obj
 
@@ -87,7 +94,7 @@ class VIEW3D_OT_align_object_to_axis(bpy.types.Operator):
         bpy.ops.object.mode_set(mode=current_mode) 
 
         message = ("World Axis: " + axis_x + axis_y + axis_z)
-        self.report({'INFO'}, message)
+        self.report({'INFO'}, message)        
         return {'FINISHED'}
     
     

@@ -132,31 +132,32 @@ def draw_snapset_pie_box_world(context, layout, box):
     button_cursor_rota_z   = icons.get("icon_cursor_rota_z") 
     button_cursor_rota_xyz = icons.get("icon_cursor_rota_xyz") 
 
+
     # align selcted to global world axis
     row = box.row(align=True)  
     if addon_prefs.toggle_pie_box_switch == False:                    
         row.alignment = 'RIGHT' 
         row.label(text="World Axis :")
 
-    props = row.operator("tpc_ot.align_object_to_axis",text="", icon_value=button_world_x.icon_id)
+    props = row.operator("tpc_ot.align_object_to_axis",text="", icon_value=button_world_xyz.icon_id)
     props.use_align_axis_x=True   
+    props.use_align_axis_y=True   
+    props.use_align_axis_z=True   
+
+    props = row.operator("tpc_ot.align_object_to_axis",text="", icon_value=button_world_z.icon_id)
+    props.use_align_axis_x=False   
     props.use_align_axis_y=False   
-    props.use_align_axis_z=False     
+    props.use_align_axis_z=True  
 
     props = row.operator("tpc_ot.align_object_to_axis",text="", icon_value=button_world_y.icon_id)
     props.use_align_axis_x=False   
     props.use_align_axis_y=True   
     props.use_align_axis_z=False    
 
-    props = row.operator("tpc_ot.align_object_to_axis",text="", icon_value=button_world_z.icon_id)
-    props.use_align_axis_x=False   
-    props.use_align_axis_y=False   
-    props.use_align_axis_z=True     
-
-    props = row.operator("tpc_ot.align_object_to_axis",text="", icon_value=button_world_xyz.icon_id)
+    props = row.operator("tpc_ot.align_object_to_axis",text="", icon_value=button_world_x.icon_id)
     props.use_align_axis_x=True   
-    props.use_align_axis_y=True   
-    props.use_align_axis_z=True              
+    props.use_align_axis_y=False   
+    props.use_align_axis_z=False        
 
     if addon_prefs.toggle_pie_box_switch == True:                    
         row.alignment = 'LEFT' 
@@ -169,36 +170,6 @@ def draw_snapset_pie_box_world(context, layout, box):
         row.alignment = 'RIGHT' 
         row.label(text="Cursor Location :")              
 
-    props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_loca_x.icon_id)
-    props.copy_rot = False
-    props.copy_rot_x = False
-    props.copy_rot_y = False
-    props.copy_rot_z = False
-    props.copy_loc = False
-    props.copy_loc_x = True
-    props.copy_loc_y = False
-    props.copy_loc_z = False
-    
-    props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_loca_y.icon_id)
-    props.copy_rot = False
-    props.copy_rot_x = False
-    props.copy_rot_y = False
-    props.copy_rot_z = False
-    props.copy_loc = False
-    props.copy_loc_x = False
-    props.copy_loc_y = True
-    props.copy_loc_z = False                    
-    
-    props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_loca_z.icon_id)
-    props.copy_rot = False
-    props.copy_rot_x = False
-    props.copy_rot_y = False
-    props.copy_rot_z = False
-    props.copy_loc = False
-    props.copy_loc_x = False
-    props.copy_loc_y = False
-    props.copy_loc_z = True                       
-    
     props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_loca_xyz.icon_id)
     props.copy_rot = False
     props.copy_rot_x = False
@@ -209,6 +180,36 @@ def draw_snapset_pie_box_world(context, layout, box):
     props.copy_loc_y = False
     props.copy_loc_z = False    
 
+    props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_loca_z.icon_id)
+    props.copy_rot = False
+    props.copy_rot_x = False
+    props.copy_rot_y = False
+    props.copy_rot_z = False
+    props.copy_loc = False
+    props.copy_loc_x = False
+    props.copy_loc_y = False
+    props.copy_loc_z = True   
+
+    props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_loca_y.icon_id)
+    props.copy_rot = False
+    props.copy_rot_x = False
+    props.copy_rot_y = False
+    props.copy_rot_z = False
+    props.copy_loc = False
+    props.copy_loc_x = False
+    props.copy_loc_y = True
+    props.copy_loc_z = False  
+
+    props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_loca_x.icon_id)
+    props.copy_rot = False
+    props.copy_rot_x = False
+    props.copy_rot_y = False
+    props.copy_rot_z = False
+    props.copy_loc = False
+    props.copy_loc_x = True
+    props.copy_loc_y = False
+    props.copy_loc_z = False
+  
     if addon_prefs.toggle_pie_box_switch == True:                    
         row.alignment = 'LEFT' 
         row.label(text=": Cursor Location")
@@ -219,27 +220,17 @@ def draw_snapset_pie_box_world(context, layout, box):
     if addon_prefs.toggle_pie_box_switch == False:                    
         row.alignment = 'RIGHT' 
         row.label(text="Cursor Rotation :")
-        
-    props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_rota_x.icon_id)
-    props.copy_rot = False
-    props.copy_rot_x = True
-    props.copy_rot_y = False
-    props.copy_rot_z = False
-    props.copy_loc = False
-    props.copy_loc_x = False
-    props.copy_loc_y = False
-    props.copy_loc_z = False
-    
-    props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_rota_y.icon_id)
-    props.copy_rot = False
+
+    props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_rota_xyz.icon_id)
+    props.copy_rot = True
     props.copy_rot_x = False
-    props.copy_rot_y = True
-    props.copy_rot_z = False                    
+    props.copy_rot_y = False
+    props.copy_rot_z = False    
     props.copy_loc = False
     props.copy_loc_x = False
     props.copy_loc_y = False
-    props.copy_loc_z = False
-    
+    props.copy_loc_z = False    
+
     props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_rota_z.icon_id)
     props.copy_rot = False
     props.copy_rot_x = False
@@ -249,12 +240,22 @@ def draw_snapset_pie_box_world(context, layout, box):
     props.copy_loc_x = False
     props.copy_loc_y = False
     props.copy_loc_z = False
-    
-    props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_rota_xyz.icon_id)
-    props.copy_rot = True
+
+    props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_rota_y.icon_id)
+    props.copy_rot = False
     props.copy_rot_x = False
+    props.copy_rot_y = True
+    props.copy_rot_z = False                    
+    props.copy_loc = False
+    props.copy_loc_x = False
+    props.copy_loc_y = False
+    props.copy_loc_z = False
+
+    props = row.operator("tpc_ot.cursor_copy", text="", icon_value=button_cursor_rota_x.icon_id)
+    props.copy_rot = False
+    props.copy_rot_x = True
     props.copy_rot_y = False
-    props.copy_rot_z = False    
+    props.copy_rot_z = False
     props.copy_loc = False
     props.copy_loc_x = False
     props.copy_loc_y = False

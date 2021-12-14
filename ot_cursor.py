@@ -181,7 +181,7 @@ def func_cursor_copy(self, context):
             message = ("Copy Cursor: " + rot_x + rot_y + rot_z + loc_x + loc_y + loc_z)
             self.report({'INFO'}, message)
     else:
-        self.report({'INFO'}, 'No Selection!')       
+        self.report({'INFO'}, 'No active selection!')       
 
 
 
