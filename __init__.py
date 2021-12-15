@@ -23,7 +23,7 @@
 bl_info = {
     "name": "SnapSet",
     "author": "marvin.k.breuer (MKB)",
-    "version": (0, 3, 6),
+    "version": (0, 3, 7),
     "blender": (2, 81, 0),
     "location": "3D View > Default Tab: Align > Panel: SnapSet",
     "description": "Full customizable preset buttons for snapping task",
