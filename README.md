@@ -62,3 +62,7 @@ Release Download https://github.com/mkbreuer/view3d_snapset/releases
 ### Align Mesh Addon
 - comes not with blender by default and must be installed separatly!
 - release download: https://github.com/mkbreuer/view3d_alignmesh/releases
+
+---
+
+### Support core Blender development - https://fund.blender.org
